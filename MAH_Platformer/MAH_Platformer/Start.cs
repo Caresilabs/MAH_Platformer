@@ -19,10 +19,8 @@ namespace MAH_Platformer
 
         public Start() : base()
         {
-            int scale = 2;
-
-            graphics.PreferredBackBufferWidth = 224 * scale;
-            graphics.PreferredBackBufferHeight = 288 * scale;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
 
             aspectRatio = graphics.PreferredBackBufferWidth / (float)graphics.PreferredBackBufferHeight;
 

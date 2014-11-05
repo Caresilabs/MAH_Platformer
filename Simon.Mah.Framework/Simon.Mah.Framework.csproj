@@ -59,7 +59,9 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animations.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="FrameAnimation.cs" />
     <Compile Include="RegionAnimation.cs" />
     <Compile Include="Animation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Scene2D\UIText.cs" />
     <Compile Include="Scene2D\UIWindow.cs" />
     <Compile Include="Screen.cs" />
+    <Compile Include="Sprite.cs" />
     <Compile Include="Tools\Camera2D.cs" />
     <Compile Include="Tools\MathUtils.cs" />
   </ItemGroup>

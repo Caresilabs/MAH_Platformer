@@ -32,7 +32,7 @@ namespace Simon.Mah.Framework.Tools
             this.Update();
         }
 
-        public Camera2D Update()
+        private Camera2D Update()
         {
             zoom.X = graphicsDevice.Viewport.Width / (float)defaultViewPort.X;
             zoom.Y = graphicsDevice.Viewport.Height / (float)defaultViewPort.Y;
@@ -43,6 +43,8 @@ namespace Simon.Mah.Framework.Tools
         // Gets the matrix used by the spritebatch
         public Matrix GetMatrix()
         {
+            Update();
+
             transform =
                 Matrix.CreateTranslation(new Vector3(-position.X, -position.Y, 0)) *
                 Matrix.CreateRotationZ(rotation) *

@@ -75,7 +75,7 @@ namespace MAH_Platformer
             LoadRegion("tileBlocked", ui, 48, 240, 48, 48);
 
             // others
-            LoadRegion("pixel", items, 133, 0, 2, 2);
+            LoadRegion("pixel", items, 133, 0, 1, 1);
 
             // Load UI
             LoadRegion("title", ui, 0, 0, 290, 48);

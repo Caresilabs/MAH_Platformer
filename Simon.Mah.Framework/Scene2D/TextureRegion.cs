@@ -18,6 +18,16 @@ namespace Simon.Mah.Framework.Scene2D
             this.region = new Rectangle(x, y, width, height);
         }
 
+        public Rectangle GetSource()
+        {
+            return region;
+        }
+
+        public Texture2D GetTexture()
+        {
+            return texture;
+        }
+
         public static implicit operator Rectangle(TextureRegion obj)
         {
             return obj.region;

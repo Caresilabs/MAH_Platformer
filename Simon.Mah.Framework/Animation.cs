@@ -7,8 +7,15 @@ using System.Text;
 
 namespace Simon.Mah.Framework
 {
-    public interface Animation
+    public abstract class Animation
     {
-        TextureRegion GetRegion(float delta);
+        protected int currentFrame;
+        protected int lastFrame;
+
+        public abstract void Update(float delta);
+
+        public abstract TextureRegion GetRegion();
+
+        public abstract bool HasNext();
     }
 }

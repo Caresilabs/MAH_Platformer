@@ -36,7 +36,7 @@ namespace Simon.Mah.Framework.Scene2D
                       null,
                       null,
                       null,
-                      camera.Update().GetMatrix());
+                      camera.GetMatrix());
 
             root.Draw(batch);
 

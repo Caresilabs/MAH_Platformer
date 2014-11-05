@@ -8,21 +8,23 @@ using System.Text;
 
 namespace Simon.Mah.Framework
 {
-    public class RegionAnimation : Animation
+    public class FrameAnimation : Animation
     {
-        private List<TextureRegion> regions;
+        private Texture2D texture;
+        private Point origin;
         private float stateTime;
+        private int size;
+        private int frames;
         private float frameDuration;
 
-        public RegionAnimation(float frameDuration, params TextureRegion[] regions)
+        public FrameAnimation(Texture2D tex, int x, int y, int size, int frames, float frameDuration)
         {
+            this.origin = new Point(x, y);
+            this.size = size;
             this.stateTime = 0;
+            this.frames = frames;
             this.frameDuration = frameDuration;
-            this.regions = new List<TextureRegion>();
-            foreach (var region in regions)
-            {
-                this.regions.Add(region);
-            }
+            this.texture = tex;
         }
 
         public override bool HasNext()
@@ -34,12 +36,13 @@ namespace Simon.Mah.Framework
         {
             lastFrame = currentFrame;
             stateTime += delta;
-            currentFrame = (int)(stateTime / (float)frameDuration) % regions.Count;
+            currentFrame = (int)(stateTime / (float)frameDuration) % frames;
         }
 
         public override TextureRegion GetRegion()
         {
-            return regions[currentFrame];
+            return new TextureRegion(
+           texture, origin.X + (size * currentFrame), origin.Y, size, size);
         }
     }
 }
