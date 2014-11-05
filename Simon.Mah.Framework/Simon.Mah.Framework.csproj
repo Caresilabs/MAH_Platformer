@@ -1,38 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{3233A852-5E2D-43C6-91AB-65C87577057B}</ProjectGuid>
+    <ProjectGuid>{80422FED-9072-45CE-81BC-D81F8A0A1ED7}</ProjectGuid>
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MAH_Platformer</RootNamespace>
-    <AssemblyName>MAH_Platformer</AssemblyName>
+    <RootNamespace>Simon.Mah.Framework</RootNamespace>
+    <AssemblyName>Simon.Mah.Framework</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
     <XnaProfile>Reach</XnaProfile>
-    <XnaCrossPlatformGroupID>52f5c8bc-1b41-4708-9fc1-74a35ce9a0ef</XnaCrossPlatformGroupID>
-    <XnaOutputType>Game</XnaOutputType>
-    <ApplicationIcon>Game.ico</ApplicationIcon>
-    <Thumbnail>GameThumbnail.png</Thumbnail>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <XnaCrossPlatformGroupID>c9551640-4630-430c-b6ba-ee5352b0340a</XnaCrossPlatformGroupID>
+    <XnaOutputType>Library</XnaOutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,58 +50,32 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets.cs" />
-    <Compile Include="HighscoreManager.cs" />
-    <Compile Include="LevelIO.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="RegionAnimation.cs" />
+    <Compile Include="Animation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Screens\GameScreen.cs" />
-    <Compile Include="Start.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Documentation.txt" />
-    <Content Include="Game.ico" />
-    <Content Include="GameThumbnail.png">
-      <XnaPlatformSpecific>true</XnaPlatformSpecific>
-    </Content>
-    <Content Include="TODO.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Simon.Mah.Framework\Simon.Mah.Framework.csproj">
-      <Project>{80422fed-9072-45ce-81bc-d81f8a0a1ed7}</Project>
-      <Name>Simon.Mah.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MAH_PlatformerContent\MAH_PlatformerContent.contentproj">
-      <Name>MAH_PlatformerContent</Name>
-      <XnaReferenceType>Content</XnaReferenceType>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 4.5</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
+    <Compile Include="Scene2D\Actor.cs" />
+    <Compile Include="Scene2D\InputHandler.cs" />
+    <Compile Include="Scene2D\Scene.cs" />
+    <Compile Include="Scene2D\TextureRegion.cs" />
+    <Compile Include="Scene2D\UIButton.cs" />
+    <Compile Include="Scene2D\UIConfig.cs" />
+    <Compile Include="Scene2D\UIImage.cs" />
+    <Compile Include="Scene2D\UISpriteButton.cs" />
+    <Compile Include="Scene2D\UIText.cs" />
+    <Compile Include="Scene2D\UIWindow.cs" />
+    <Compile Include="Screen.cs" />
+    <Compile Include="Tools\Camera2D.cs" />
+    <Compile Include="Tools\MathUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

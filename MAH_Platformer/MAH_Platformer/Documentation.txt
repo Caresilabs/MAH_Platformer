@@ -1,0 +1,30 @@
+﻿How to design like a hippie!
+
+Basic Entities:
+	{Tile, Pacman, Ghost, Pellet, Fruit}
+
+	Tile->
+		Background, Collision Type (Wall, or Empty)
+			Wall-> Draw line where neighbour is collision false
+
+	Pacman->
+		Animation Component, Input Component, Movement
+	
+	Ghost->
+		AI Component, Movement, 
+
+	Pellet->
+		Collision, static position
+
+	Fruit->
+		Collision, static position
+
+Entity: Components, Systems
+
+World:
+	{Grid, Entites[]}
+
+	Grid->
+		WorldPositionToGrid, CanEntityMoveForward, GetDirectionsAvailable
+
+

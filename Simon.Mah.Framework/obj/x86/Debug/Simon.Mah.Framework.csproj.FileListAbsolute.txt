@@ -1,0 +1,6 @@
+C:\Users\Simon\Documents\GitHub\MAH_Platformer\Simon.Mah.Framework\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Simon\Documents\GitHub\MAH_Platformer\Simon.Mah.Framework\obj\x86\Debug\Simon.Mah.Framework.csprojResolveAssemblyReference.cache
+C:\Users\Simon\Documents\GitHub\MAH_Platformer\Simon.Mah.Framework\bin\x86\Debug\Simon.Mah.Framework.dll
+C:\Users\Simon\Documents\GitHub\MAH_Platformer\Simon.Mah.Framework\bin\x86\Debug\Simon.Mah.Framework.pdb
+C:\Users\Simon\Documents\GitHub\MAH_Platformer\Simon.Mah.Framework\obj\x86\Debug\Simon.Mah.Framework.dll
+C:\Users\Simon\Documents\GitHub\MAH_Platformer\Simon.Mah.Framework\obj\x86\Debug\Simon.Mah.Framework.pdb
