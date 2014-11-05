@@ -1,30 +1,54 @@
 ﻿How to design like a hippie!
 
 Basic Entities:
-	{Tile, Pacman, Ghost, Pellet, Fruit}
+	[
+		Bob
+		Big bad Boss
+		Boulder
+		Little Steve
+	]
 
-	Tile->
-		Background, Collision Type (Wall, or Empty)
-			Wall-> Draw line where neighbour is collision false
+	*? = Low Priority
 
-	Pacman->
-		Animation Component, Input Component, Movement
+Blocks (Tiles):
+	[
+		AIR
+		Ground
+		Win
+		Pitblock (push boulder)
+		Switchblock
+		Loot block
+		Teleport
+		?Ice
+		?Ladder
+	]
+
+	*? = Low Priority
+
+Items:
+	[
+		Fire
+		Pistol
+	]
+
+	*? = Low Priority
+
+
+Map Design:
+
+	Every block -> ID
+	ID = 0-255 (or unlimited)
+	Every 8 ID is BASE ID
+	To calc BASE ID => ID % 8
+	ID used for TP, and more
 	
-	Ghost->
-		AI Component, Movement, 
 
-	Pellet->
-		Collision, static position
+Block/Entities Connections
 
-	Fruit->
-		Collision, static position
+	Blocks can be triggered
+	Entities can Enter a block? one or more?
+	Entities Can Be 'USE' by player
+	Entities Can Collide with other entities
 
-Entity: Components, Systems
-
-World:
-	{Grid, Entites[]}
-
-	Grid->
-		WorldPositionToGrid, CanEntityMoveForward, GetDirectionsAvailable
 
 
