@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MAH_Platformer.Model;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Simon.Mah.Framework;
 using Simon.Mah.Framework.Tools;
@@ -14,12 +15,16 @@ namespace MAH_Platformer.Screens
         private Camera2D camera;
 
         private Sprite sprite;
+        private World world;
+
         public override void Init()
         {
             this.camera = new Camera2D(GetGraphics(), 720, 480);
             this.sprite = new Sprite(Assets.GetRegion("pixel"), 720 / 2, 240, 15, 15);
 
             this.sprite.AddAnimation("idle", new FrameAnimation(Assets.items, 0, 0, 16, 3, .18f)).SetAnimation("idle");
+
+            this.world = new World();
         }
 
         public override void Update(float delta)

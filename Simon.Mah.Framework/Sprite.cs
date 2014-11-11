@@ -50,8 +50,10 @@ namespace Simon.Mah.Framework
             this.Effect = SpriteEffects.None;
             this.Position = new Vector2(x, y);
             this.Animations = new Animations();
-            this.Origin = new Vector2(region.GetSource().Width / 2, region.GetSource().Height / 2);
             this.DrawOffset = new Vector2(-Size.X/2, -Size.Y/2);
+
+            if (region != null)
+                this.Origin = new Vector2(region.GetSource().Width / 2, region.GetSource().Height / 2);
 
             UpdateSizeScale();
         }
@@ -72,7 +74,8 @@ namespace Simon.Mah.Framework
 
         private void UpdateSizeScale()
         {
-            this.SizeScale = new Vector2(Size.X / Region.GetSource().Width, Size.Y / Region.GetSource().Height);
+            if (Region != null)
+                this.SizeScale = new Vector2(Size.X / Region.GetSource().Width, Size.Y / Region.GetSource().Height);
         }
 
         // ==== HELPERS ==== //
@@ -105,6 +108,12 @@ namespace Simon.Mah.Framework
         public Sprite SetPosition(float x, float y)
         {
             this.Position = new Vector2(x, y);
+            return this;
+        }
+
+        public Sprite SetPosition(Vector2 position)
+        {
+            this.Position = new Vector2(position.X, position.Y);
             return this;
         }
 

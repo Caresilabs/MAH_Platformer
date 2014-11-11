@@ -9,6 +9,8 @@ namespace MAH_Platformer
 {
     public static class LevelIO
     {
+        public const int ID_PER_BASE = 8;
+
         public enum MAP_TILES
         {
             MAP_PASSABLE = 0,

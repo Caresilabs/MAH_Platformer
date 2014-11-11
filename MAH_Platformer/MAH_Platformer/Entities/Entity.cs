@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MAH_Platformer.Levels;
+using MAH_Platformer.Levels.Blocks;
+using Microsoft.Xna.Framework;
+using Simon.Mah.Framework.Scene2D;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +9,51 @@ using System.Text;
 
 namespace MAH_Platformer.Entities
 {
-    class Entity
+    public abstract class Entity : GameObject
     {
+        public Level Level { get; set; }
+
+        public Vector2 Velocity { get; set; }
+
+        public Vector2 Gravity { get; set; }
+
+        public Block CurrentBlock { get; set; }
+
+        public bool Flying { get; set; }
+
+        public bool Alive { get; set; }
+
+        public Entity(TextureRegion region, float x, float y, float width, float height) : base(region, x, y, width, height)
+        {
+            this.Flying = false;
+            this.Alive = true;
+        }
+
+        public void Update(float delta, bool processGravity = true) // TODO hmm check if virtual is working
+        {
+            if (processGravity)
+                Velocity += Gravity * delta;
+
+            if (CurrentBlock != null)
+                Velocity *= CurrentBlock.GetFriction(this) * delta;
+
+            position += Velocity * delta;
+
+            base.Update(delta);
+        }
+
+        private bool IsFree(float x, float y)
+        {
+            return true;
+        }
+
+        public virtual void Collide(Entity entity) {}
+
+        public virtual bool Blocks(Entity entity)
+        {
+            return bounds.Intersects(entity.bounds);
+        }
+
        /* public bool PixelCollition(Entity other)
         {
             Color[] dataA = new Color[tex.Width * tex.Height];

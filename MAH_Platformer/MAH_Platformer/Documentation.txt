@@ -1,4 +1,4 @@
-﻿How to design like a hippie!
+﻿How to design like a hippie rebel!
 
 Basic Entities:
 	[
@@ -6,6 +6,7 @@ Basic Entities:
 		Big bad Boss
 		Boulder
 		Little Steve
+		Save Point
 	]
 
 	*? = Low Priority
@@ -40,7 +41,7 @@ Map Design:
 	ID = 0-255 (or unlimited)
 	Every 8 ID is BASE ID
 	To calc BASE ID => ID % 8
-	ID used for TP, and more
+	ID used for TP, and more connections
 	
 
 Block/Entities Connections
@@ -49,6 +50,16 @@ Block/Entities Connections
 	Entities can Enter a block? one or more?
 	Entities Can Be 'USE' by player
 	Entities Can Collide with other entities
+
+
+Player Mechanics:
+
+	Move
+	Jump + Double/walljump
+	Use
+	Climb
+	?Fly
+
 
 
 

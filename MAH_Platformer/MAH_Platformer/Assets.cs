@@ -41,38 +41,9 @@ namespace MAH_Platformer
             ui = manager.Load<Texture2D>("Graphics/ui");
 
             // Load our assets regions
-            LoadRegion("pacman", items, 16, 0, 16, 16);
-            LoadRegion("energizer", items, 64, 0, 16, 16);
+            LoadRegion("PlayerEntity", items, 16, 0, 16, 16);
 
-            LoadRegion("fruit1", items, 0, 96, 16, 16);
-            LoadRegion("fruit2", items, 0, 96, 16, 16);
-            LoadRegion("fruit3", items, 0, 96, 16, 16);
-            LoadRegion("fruit4", items, 0, 96, 16, 16);
-
-            //ghosts
-            LoadRegion("ghost_blinky", items, 0, 16, 16, 16);
-            LoadRegion("ghost_pinky", items, 0, 32, 16, 16);
-            LoadRegion("ghost_inky", items, 0, 48, 16, 16);
-            LoadRegion("ghost_clyde", items, 0, 62, 16, 16);
-
-            // Load tiles
-            LoadRegion("tileOut0", ui, 0, 192, 24, 24);
-            LoadRegion("tileOut1", ui, 0, 192, 24, 24);
-            LoadRegion("tileOut2", ui, 0, 192, 24, 24);
-            LoadRegion("tileOut3", ui, 0, 192, 24, 24);
-
-            LoadRegion("tileIn0", ui, 24, 192, 24, 24);
-            LoadRegion("tileIn1", ui, 24, 192, 24, 24);
-            LoadRegion("tileIn2", ui, 24, 192, 24, 24);
-            LoadRegion("tileIn3", ui, 24, 192, 24, 24);
-
-            LoadRegion("tileWall0", ui, 48, 192, 24, 24);
-            LoadRegion("tileWall1", ui, 48, 192, 24, 24);
-            LoadRegion("tileWall2", ui, 48, 192, 24, 24);
-            LoadRegion("tileWall3", ui, 48, 192, 24, 24);
-
-            LoadRegion("tileGhost", ui, 0, 240, 48, 48);
-            LoadRegion("tileBlocked", ui, 48, 240, 48, 48);
+            LoadRegion("AirBlock", ui, 0, 240, 48, 48);
 
             // others
             LoadRegion("pixel", items, 133, 0, 1, 1);
