@@ -69,7 +69,8 @@ namespace Simon.Mah.Framework
 
         public void Draw(SpriteBatch batch)
         {
-            batch.Draw(Region, Position + DrawOffset, Region, Color, Rotation, Origin, Scale * SizeScale, Effect, ZIndex);
+            if (Region != null)
+                batch.Draw(Region, Position + DrawOffset, Region, Color, Rotation, Origin, Scale * SizeScale, Effect, ZIndex);
         }
 
         private void UpdateSizeScale()

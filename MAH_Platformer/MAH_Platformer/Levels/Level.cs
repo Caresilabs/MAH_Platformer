@@ -35,7 +35,24 @@ namespace MAH_Platformer.Levels
         public Level()
         {
             this.entities = new List<Entity>();
-            
+        }
+
+        public void Update(float delta)
+        {
+            // update entities
+            foreach (var entity in entities)
+            {
+                entity.Update(delta);
+            }
+
+            // Update blocks
+            for (int j = 0; j < blocks.GetLength(1); j++)
+            {
+                for (int i = 0; i < blocks.GetLength(0); i++)
+                {
+                    blocks[i, j].Update(delta);
+                }
+            }
         }
 
         public void InitLevel(int level = 1)
@@ -45,17 +62,30 @@ namespace MAH_Platformer.Levels
             this.blocks = new Block[width, height];
 
             int[,] loadedMap = new int[width, height]; //todo
-            int id = 33; // temp!
+            int id = 0; // temp!
 
             // Load blocks
             for (int j = 0; j < loadedMap.GetLength(1); j++)
             {
                 for (int i = 0; i < loadedMap.GetLength(0); i++)
                 {
-                    Block block = GetBlock(50, 50, id);
+                    if (i == 1 && j == 0)
+                        id = (int)Entities.PLAYER;
+                    else
+                        id = 0;
+
+                    Block block = GetBlock((int)(i * Block.BLOCK_SIZE), (int)(j * Block.BLOCK_SIZE), id);
                     block.Level = this;
                     blocks[i, j] = block;
                 }
+            }
+
+            // test
+            for (int j = 0; j < loadedMap.GetLength(0); j++)
+            {
+                Block block = GetBlock((int)(j * Block.BLOCK_SIZE + Block.BLOCK_SIZE / 2), (int)(Block.BLOCK_SIZE *8), 9);
+                block.Level = this;
+                blocks[j,  8] = block;
             }
 
             // Fill with entities
@@ -63,6 +93,11 @@ namespace MAH_Platformer.Levels
             {
                 for (int i = 0; i < loadedMap.GetLength(0); i++)
                 {
+                    if (i == 1 && j == 0)
+                        id = (int)Entities.PLAYER;
+                    else
+                        id = 0;
+
                     FillBlock(i, j, id);
                 }
             }
@@ -70,12 +105,17 @@ namespace MAH_Platformer.Levels
 
         public void FillBlock(int x, int y, int id)
         {
-            int baseId = id - (id % LevelIO.ID_PER_BASE);
+            int baseId = id - (id % LevelIO.ID_PER_BASE) - Enum.GetValues(typeof(Entities)).Cast<int>().Min();
+
+            if (id > MAX_ID || id < Enum.GetValues(typeof(Entities)).Cast<int>().Min())
+                return;
 
             string nameSpace = "MAH_Platformer.Entities" + "."; // - Enum.GetValues(typeof(Blocks)).Cast<int>().Max()
-            string name = Capitalise(((Entities)(baseId - Enum.GetValues(typeof(Blocks)).Cast<int>().Min())).ToString()) + "Entity";
+            string name = Capitalise(((Entities)baseId + Enum.GetValues(typeof(Entities)).Cast<int>().Min()).ToString()) + "Entity";
             var objType = Type.GetType(nameSpace + name, true);
             Entity entity = (Entity)Activator.CreateInstance(objType, Assets.GetRegion(name), x, y);
+
+            AddEntity(entity);
         }
 
         public Block GetBlock(int x, int y)
@@ -83,11 +123,22 @@ namespace MAH_Platformer.Levels
             return blocks[x, y];
         }
 
+        public Block GetBlock(Vector2 pos)
+        {
+            return blocks[(int)pos.X, (int)pos.Y];
+        }
+
+        public Block[,] GetBlocks()
+        {
+            return blocks;
+        }
+
         public Block GetBlock(int x, int y, int id)
         {
             int baseId = id - (id % LevelIO.ID_PER_BASE);
 
-            if (id > (Enum.GetValues(typeof(Blocks)).Cast<int>().Max() / LevelIO.ID_PER_BASE)) return new Block(null, x, y); // No valid block
+            if (baseId > (Enum.GetValues(typeof(Blocks)).Cast<int>().Max() * LevelIO.ID_PER_BASE)) 
+                return new AirBlock(null, x, y); // No valid block
 
             // Using generics to get new block
             string nameSpace = "MAH_Platformer.Levels.Blocks" + ".";
@@ -109,5 +160,9 @@ namespace MAH_Platformer.Levels
             return Char.ToUpper(str[0]) + str.Substring(1).ToLower();
         }
 
+        public List<Entity> GetEntities()
+        {
+            return entities;
+        }
     }
 }

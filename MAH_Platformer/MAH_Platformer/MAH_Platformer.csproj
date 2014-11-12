@@ -78,6 +78,8 @@
     <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="HighscoreManager.cs" />
     <Compile Include="LevelIO.cs" />
+    <Compile Include="Levels\Blocks\SolidBlock.cs" />
+    <Compile Include="Levels\Blocks\GroundBlock.cs" />
     <Compile Include="Levels\Blocks\AirBlock.cs" />
     <Compile Include="Levels\Blocks\Block.cs" />
     <Compile Include="Levels\Level.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Start.cs" />
+    <Compile Include="View\WorldRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation.txt" />

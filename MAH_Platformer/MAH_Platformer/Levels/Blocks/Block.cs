@@ -8,9 +8,9 @@ using System.Text;
 
 namespace MAH_Platformer.Levels.Blocks
 {
-    public class Block : GameObject
+    public abstract class Block : GameObject
     {
-        public const float BLOCK_SIZE = 32;
+        public static float BLOCK_SIZE = 32;
 
         public List<Entity> Entities { get; set; }
 
@@ -23,6 +23,7 @@ namespace MAH_Platformer.Levels.Blocks
         public Block(TextureRegion region, float x, float y)
             : base(region, x, y, BLOCK_SIZE, BLOCK_SIZE)
         {
+            this.Entities = new List<Entity>();
             this.BlocksMotion = false;
         }
 
