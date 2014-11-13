@@ -25,6 +25,7 @@ namespace MAH_Platformer.Levels.Blocks
         {
             this.Entities = new List<Entity>();
             this.BlocksMotion = false;
+            this.sprite.ZIndex = .5f;
         }
 
         public virtual void Use(string item)
@@ -43,7 +44,7 @@ namespace MAH_Platformer.Levels.Blocks
 
         public virtual float GetFriction(Entity entity)
         {
-            return .6f;
+            return 1f;
         }
 
         public void AddEntity(Entity entity)

@@ -11,7 +11,9 @@ namespace MAH_Platformer.Entities
     {
         public const float WIDTH = 28;
         public const float HEIGHT = 52;
-        public const float DEFAULT_SPEED = 5;
+
+        public const float DEFAULT_SPEED = 100;
+        public const float DEFAULT_JUMP = -150;
 
         private float speed;
 
@@ -23,20 +25,32 @@ namespace MAH_Platformer.Entities
 
         public override void Update(float delta, bool processGravity = true)
         {
-            if (InputHandler.KeyDown(Keys.A))
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 velocity.X = -speed;
             }
-            else if (InputHandler.KeyDown(Keys.D))
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 velocity.X = speed;
             }
             else
             {
-                velocity.X = 0;
+               // velocity.X = 0;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                Jump();
             }
 
             base.Update(delta, processGravity);
+        }
+
+        public void Jump()
+        {
+            position.Y -= 1;
+            velocity.Y = DEFAULT_JUMP;
+            IsGravity = true;
         }
 
     }

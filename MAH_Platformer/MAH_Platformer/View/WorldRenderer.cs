@@ -25,6 +25,12 @@ namespace MAH_Platformer.View
 
         public void Update(float delta)
         {
+            LerpCamera(world.GetLevel().GetPlayer().GetBounds().X - camera.GetWidth() / 2, world.GetLevel().GetPlayer().GetBounds().Y - camera.GetHeight() / 2, delta);
+        }
+
+        public void LerpCamera(float x, float y, float delta)
+        {
+            camera.SetPosition(camera.GetPosition().X + (x - camera.GetPosition().X) * delta * 7, camera.GetPosition().Y + ( y - camera.GetPosition().Y) * delta * 7);
         }
 
         public void Render(SpriteBatch batch)
@@ -36,6 +42,8 @@ namespace MAH_Platformer.View
                      camera.GetMatrix());
 
             DrawBlocks(batch);
+
+            DrawEntites(batch);
 
             batch.End();
         }
@@ -49,14 +57,13 @@ namespace MAH_Platformer.View
                 {
                     Block block = blocks[i, j];
                     block.Draw(batch);
-                    DrawEntites(block, batch);
                 }
             }
         }
 
-        private void DrawEntites(Block block, SpriteBatch batch)
+        private void DrawEntites(SpriteBatch batch)
         {
-            foreach (var entity in block.Entities)
+            foreach (var entity in world.GetLevel().GetEntities()) 
             {
                 entity.Draw(batch);
             }
