@@ -10,7 +10,12 @@ namespace MAH_Platformer.Model
 {
     public class World
     {
-        public static readonly Vector2 GRAVITY = new Vector2(0, 20);
+        public enum Direction
+        {
+            LEFT, RIGHT, UP, DOWN
+        }
+
+        public static readonly Vector2 GRAVITY = new Vector2(0, 400);
 
         private Level level;
 

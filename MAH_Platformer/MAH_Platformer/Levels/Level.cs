@@ -88,6 +88,13 @@ namespace MAH_Platformer.Levels
                 blocks[j,  8] = block;
             }
 
+            for (int j = 0; j < loadedMap.GetLength(0)/2; j++)
+            {
+                Block block = GetBlock((int)(j * Block.BLOCK_SIZE + Block.BLOCK_SIZE / 2), (int)(Block.BLOCK_SIZE * 7), 9);
+                block.Level = this;
+                blocks[j, 7] = block;
+            }
+
             // Fill with entities
             for (int j = 0; j < loadedMap.GetLength(1); j++)
             {
@@ -115,17 +122,26 @@ namespace MAH_Platformer.Levels
             var objType = Type.GetType(nameSpace + name, true);
             Entity entity = (Entity)Activator.CreateInstance(objType, Assets.GetRegion(name), x, y);
 
+            if (entity is PlayerEntity)
+                player = (PlayerEntity)entity;
+
             AddEntity(entity);
         }
 
         public Block GetBlock(int x, int y)
         {
+            if (x < 0 || x > blocks.GetLength(0) -1 || (y < 0 || y > blocks.GetLength(1) -1 )) return new AirBlock(null, x, y);
             return blocks[x, y];
         }
 
         public Block GetBlock(Vector2 pos)
         {
-            return blocks[(int)pos.X, (int)pos.Y];
+            return GetBlock((int)(pos.X / Block.BLOCK_SIZE), (int)(pos.Y / Block.BLOCK_SIZE));
+        }
+
+        public Block GetBlock(float x, float y)
+        {
+            return GetBlock((int)(x / Block.BLOCK_SIZE), (int)(y / Block.BLOCK_SIZE));
         }
 
         public Block[,] GetBlocks()
@@ -163,6 +179,11 @@ namespace MAH_Platformer.Levels
         public List<Entity> GetEntities()
         {
             return entities;
+        }
+
+        public PlayerEntity GetPlayer()
+        {
+            return player;
         }
     }
 }

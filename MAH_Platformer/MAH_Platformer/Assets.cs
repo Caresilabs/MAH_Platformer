@@ -41,15 +41,15 @@ namespace MAH_Platformer
             ui = manager.Load<Texture2D>("Graphics/ui");
 
             // Entities
-            LoadRegion("PlayerEntity", items, 133, 0, 1, 1);
+            LoadRegion("PlayerEntity", items, 0, 0, 16, 16);
 
             // Blocks
-            LoadRegion("AirBlock", items, 0, 240, 1, 1);
-            LoadRegion("GroundBlock", items, 133, 0, 1, 1);
+            LoadRegion("AirBlock", items, 0, 0, 1, 1);
+            LoadRegion("GroundBlock", items, 0, 0, 16, 16);
 
 
             // Load UI
-            LoadRegion("pixel", items, 133, 0, 1, 1);
+            LoadRegion("pixel", items, 0, 0, 16, 16);
             LoadRegion("title", ui, 0, 0, 290, 48);
             LoadRegion("uiContainer", ui, 0, 64, 288, 128);
             LoadRegion("button", ui, 320, 64, 192, 64);

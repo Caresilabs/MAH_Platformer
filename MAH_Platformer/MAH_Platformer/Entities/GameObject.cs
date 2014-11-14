@@ -38,5 +38,10 @@ namespace MAH_Platformer.Entities
             bounds.X = (int)position.X;
             bounds.Y = (int)position.Y;
         }
+
+        public Rectangle GetBounds()
+        {
+            return bounds;
+        }
     }
 }
