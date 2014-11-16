@@ -39,6 +39,12 @@ namespace MAH_Platformer.Entities
             bounds.Y = (int)position.Y - bounds.Height / 2;
         }
 
+        public void SetPosition(Vector2 pos)
+        {
+            position.X = pos.X;
+            position.Y = pos.Y;
+        }
+
         public Rectangle GetBounds()
         {
             return bounds;

@@ -16,7 +16,7 @@ namespace MAH_Platformer.Entities
 
         public const float DEFAULT_SPEED = 100;
         public const float DEFAULT_JUMP = -440;
-        public const float MAX_SPEED = 600;
+        public const float MAX_SPEED = 750;
 
         public enum PlayerState
         {
@@ -52,22 +52,22 @@ namespace MAH_Platformer.Entities
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                velocity.Y += speed / 3;
+                if (!IsGrounded)
+                    velocity.Y += speed / 3;
             }
 
             if (InputHandler.KeyDown(Keys.Space))
             {
-               // if (state != PlayerState.CLIMBING)
-                    if (IsGrounded || jumps < 2)
-                        Jump();
+                if (IsGrounded || jumps < 2)
+                    Jump();
             }
 
             if (state == PlayerState.CLIMBING)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.W))
-                    velocity.Y = -DEFAULT_SPEED;
+                    velocity.Y = -DEFAULT_SPEED * 2.5f;
                 else if (Keyboard.GetState().IsKeyDown(Keys.S))
-                    velocity.Y = DEFAULT_SPEED;
+                    velocity.Y = DEFAULT_SPEED * 2.5f;
                 else
                     velocity.Y = 0;
             }
@@ -91,7 +91,10 @@ namespace MAH_Platformer.Entities
             if (Level.GetBlock(position) is LadderBlock)
             {
                 if (!Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.S)) return;
-                if (state != PlayerState.JUMPING) return;
+                if (!(state == PlayerState.JUMPING || IsGrounded) || state == PlayerState.CLIMBING) return;
+
+                if (IsGrounded)
+                    position.Y -= 4;
 
                 state = PlayerState.CLIMBING;
                 IsGravity = false;

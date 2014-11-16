@@ -30,6 +30,9 @@ namespace MAH_Platformer.Screens
         {
             world.Update(delta);
             renderer.Update(delta);
+
+            if (!world.GetLevel().GetPlayer().Alive)
+                Init();
         }
 
         public override void Draw(SpriteBatch batch)

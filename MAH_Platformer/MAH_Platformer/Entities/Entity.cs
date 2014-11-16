@@ -168,6 +168,17 @@ namespace MAH_Platformer.Entities
             return bounds.Intersects(entity.bounds);
         }
 
+        public void SetVelocity(float x, float y)
+        {
+            velocity.X = x;
+            velocity.Y = y;
+        }
+
+        public Vector2 GetVelocity()
+        {
+            return velocity;
+        }
+
         /* public bool PixelCollition(Entity other)
          {
              Color[] dataA = new Color[tex.Width * tex.Height];

@@ -78,6 +78,7 @@
     <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="HighscoreManager.cs" />
     <Compile Include="LevelIO.cs" />
+    <Compile Include="Levels\Blocks\TeleportBlock.cs" />
     <Compile Include="Levels\Blocks\LadderBlock.cs" />
     <Compile Include="Levels\Blocks\SolidBlock.cs" />
     <Compile Include="Levels\Blocks\GroundBlock.cs" />

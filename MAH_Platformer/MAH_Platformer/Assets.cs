@@ -48,8 +48,9 @@ namespace MAH_Platformer
 
             // Blocks
             LoadRegion("AirBlock", items, 400, 0, 1, 1);
-            LoadRegion("GroundBlock", items, 128, 0, 16, 16);
+            LoadRegion("GroundBlock", items, 128, 1, 16, 16);
             LoadRegion("LadderBlock", items, 96, 384, 32, 32);
+            LoadRegion("TeleportBlock", items, 96, 512, 32, 32);
 
 
             // Load UI

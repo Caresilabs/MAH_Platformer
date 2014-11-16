@@ -16,7 +16,8 @@ namespace MAH_Platformer.Levels
         {
             AIR,
             GROUND,
-            Ladder
+            Ladder,
+            Teleport
         }
 
         public enum Entities
@@ -73,6 +74,7 @@ namespace MAH_Platformer.Levels
                     int id = loadedMap[i, j];
                     Block block = GetBlock((int)(i * Block.BLOCK_SIZE), (int)(j * Block.BLOCK_SIZE), id);
                     block.Level = this;
+                    block.Id = id;
                     blocks[i, j] = block;
                 }
             }
@@ -136,12 +138,25 @@ namespace MAH_Platformer.Levels
 
         public Block GetBlock(Vector2 pos)
         {
-            return GetBlock((int)(pos.X / Block.BLOCK_SIZE) +1, (int)(pos.Y / Block.BLOCK_SIZE));
+            return GetBlock((int)((pos.X + Block.BLOCK_SIZE / 2) / Block.BLOCK_SIZE), (int)((pos.Y + Block.BLOCK_SIZE / 2) / Block.BLOCK_SIZE));
         }
 
         public Block GetBlock(float x, float y)
         {
             return GetBlock((int)(x / Block.BLOCK_SIZE), (int)(y / Block.BLOCK_SIZE));
+        }
+
+        public Block GetBlockById(int id)
+        {
+            for (int j = 0; j < blocks.GetLength(1); j++)
+            {
+                for (int i = 0; i < blocks.GetLength(0); i++)
+                {
+                    if (blocks[i, j].Id == id)
+                        return blocks[i, j];
+                }
+            }
+            return null;
         }
 
         public Block[,] GetBlocks()

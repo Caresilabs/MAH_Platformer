@@ -33,6 +33,10 @@ namespace MAH_Platformer.Levels.Blocks
         {
         }
 
+        public virtual void Enter(Entity entity)
+        {
+        }
+
         public virtual bool Blocks(Entity entity)
         {
             return BlocksMotion;
@@ -51,6 +55,7 @@ namespace MAH_Platformer.Levels.Blocks
         public void AddEntity(Entity entity)
         {
             this.Entities.Add(entity);
+            this.Enter(entity);
         }
 
         public void RemoveEntity(Entity entity)
