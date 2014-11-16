@@ -15,7 +15,8 @@ namespace MAH_Platformer.Levels
         public enum Blocks
         {
             AIR,
-            GROUND
+            GROUND,
+            Ladder
         }
 
         public enum Entities
@@ -57,54 +58,39 @@ namespace MAH_Platformer.Levels
 
         public void InitLevel(int level = 1)
         {
-            this.width = 20; // TODO
-            this.height = 10;
-            this.blocks = new Block[width, height];
+            int[,] loadedMap = LevelIO.ReadLevel(1); //todo
 
-            int[,] loadedMap = new int[width, height]; //todo
-            int id = 0; // temp!
+            this.width = loadedMap.GetLength(0); // TODO
+            this.height = loadedMap.GetLength(1);
+
+            this.blocks = new Block[width, height];
 
             // Load blocks
             for (int j = 0; j < loadedMap.GetLength(1); j++)
             {
                 for (int i = 0; i < loadedMap.GetLength(0); i++)
                 {
-                    if (i == 1 && j == 0)
-                        id = (int)Entities.PLAYER;
-                    else
-                        id = 0;
-
+                    int id = loadedMap[i, j];
                     Block block = GetBlock((int)(i * Block.BLOCK_SIZE), (int)(j * Block.BLOCK_SIZE), id);
                     block.Level = this;
                     blocks[i, j] = block;
                 }
             }
 
-            // test
-            for (int j = 0; j < loadedMap.GetLength(0); j++)
-            {
-                Block block = GetBlock((int)(j * Block.BLOCK_SIZE + Block.BLOCK_SIZE / 2), (int)(Block.BLOCK_SIZE *8), 9);
-                block.Level = this;
-                blocks[j,  8] = block;
-            }
 
-            for (int j = 0; j < loadedMap.GetLength(0)/2; j++)
-            {
-                Block block = GetBlock((int)(j * Block.BLOCK_SIZE + Block.BLOCK_SIZE / 2), (int)(Block.BLOCK_SIZE * 7), 9);
-                block.Level = this;
-                blocks[j, 7] = block;
-            }
+            //for (int j = 0; j < loadedMap.GetLength(0)/2; j++)
+            //{
+            //    Block block = GetBlock((int)(j * Block.BLOCK_SIZE + Block.BLOCK_SIZE / 2), (int)(Block.BLOCK_SIZE * 7), 9);
+            //    block.Level = this;
+            //    blocks[j, 7] = block;
+            //}
 
             // Fill with entities
             for (int j = 0; j < loadedMap.GetLength(1); j++)
             {
                 for (int i = 0; i < loadedMap.GetLength(0); i++)
                 {
-                    if (i == 1 && j == 0)
-                        id = (int)Entities.PLAYER;
-                    else
-                        id = 0;
-
+                    int id = loadedMap[i, j];
                     FillBlock(i, j, id);
                 }
             }
@@ -112,41 +98,20 @@ namespace MAH_Platformer.Levels
 
         public void FillBlock(int x, int y, int id)
         {
-            int baseId = id - (id % LevelIO.ID_PER_BASE) - Enum.GetValues(typeof(Entities)).Cast<int>().Min();
+            int baseId = id - (id % LevelIO.ID_PER_BASE) - Enum.GetValues(typeof(Entities)).Cast<int>().Min()*LevelIO.ID_PER_BASE;
 
-            if (id > MAX_ID || id < Enum.GetValues(typeof(Entities)).Cast<int>().Min())
+            if (id > MAX_ID || id < Enum.GetValues(typeof(Entities)).Cast<int>().Min() * LevelIO.ID_PER_BASE)
                 return;
 
             string nameSpace = "MAH_Platformer.Entities" + "."; // - Enum.GetValues(typeof(Blocks)).Cast<int>().Max()
             string name = Capitalise(((Entities)baseId + Enum.GetValues(typeof(Entities)).Cast<int>().Min()).ToString()) + "Entity";
             var objType = Type.GetType(nameSpace + name, true);
-            Entity entity = (Entity)Activator.CreateInstance(objType, Assets.GetRegion(name), x, y);
+            Entity entity = (Entity)Activator.CreateInstance(objType, Assets.GetRegion(name), x * Block.BLOCK_SIZE, y * Block.BLOCK_SIZE);
 
             if (entity is PlayerEntity)
                 player = (PlayerEntity)entity;
 
             AddEntity(entity);
-        }
-
-        public Block GetBlock(int x, int y)
-        {
-            if (x < 0 || x > blocks.GetLength(0) -1 || (y < 0 || y > blocks.GetLength(1) -1 )) return new AirBlock(null, x, y);
-            return blocks[x, y];
-        }
-
-        public Block GetBlock(Vector2 pos)
-        {
-            return GetBlock((int)(pos.X / Block.BLOCK_SIZE), (int)(pos.Y / Block.BLOCK_SIZE));
-        }
-
-        public Block GetBlock(float x, float y)
-        {
-            return GetBlock((int)(x / Block.BLOCK_SIZE), (int)(y / Block.BLOCK_SIZE));
-        }
-
-        public Block[,] GetBlocks()
-        {
-            return blocks;
         }
 
         public Block GetBlock(int x, int y, int id)
@@ -161,6 +126,27 @@ namespace MAH_Platformer.Levels
             string name = Capitalise(((Blocks)(baseId / LevelIO.ID_PER_BASE)).ToString()) + "Block";
             var objType = Type.GetType(nameSpace + name, true);
             return (Block)Activator.CreateInstance(objType, Assets.GetRegion(name), x, y);
+        }
+
+        public Block GetBlock(int x, int y)
+        {
+            if (x < 0 || x > blocks.GetLength(0) - 1 || (y < 0 || y > blocks.GetLength(1) - 1)) return new AirBlock(null, x, y);
+            return blocks[x, y];
+        }
+
+        public Block GetBlock(Vector2 pos)
+        {
+            return GetBlock((int)(pos.X / Block.BLOCK_SIZE) +1, (int)(pos.Y / Block.BLOCK_SIZE));
+        }
+
+        public Block GetBlock(float x, float y)
+        {
+            return GetBlock((int)(x / Block.BLOCK_SIZE), (int)(y / Block.BLOCK_SIZE));
+        }
+
+        public Block[,] GetBlocks()
+        {
+            return blocks;
         }
 
         public void AddEntity(Entity entity)

@@ -30,3 +30,5 @@ C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platforme
 C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\obj\x86\Debug\MAH_Platformer.exe
 C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\obj\x86\Debug\MAH_Platformer.pdb
+C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\character.xnb
+C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\bg1.xnb

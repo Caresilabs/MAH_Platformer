@@ -16,7 +16,7 @@ namespace MAH_Platformer.Levels.Blocks
 
         public override float GetFriction(Entities.Entity entity)
         {
-            return .94f;
+            return .88f;
         }
     }
 }

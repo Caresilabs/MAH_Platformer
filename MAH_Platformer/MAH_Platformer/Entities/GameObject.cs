@@ -33,10 +33,10 @@ namespace MAH_Platformer.Entities
             sprite.Draw(batch);
         }
 
-        private void UpdateBounds()
+        public void UpdateBounds()
         {
-            bounds.X = (int)position.X;
-            bounds.Y = (int)position.Y;
+            bounds.X = (int)position.X - (bounds.Width / 2);
+            bounds.Y = (int)position.Y - bounds.Height / 2;
         }
 
         public Rectangle GetBounds()

@@ -23,6 +23,8 @@ namespace MAH_Platformer
 
         public static Texture2D items;
         public static Texture2D ui;
+        public static Texture2D character;
+        public static Texture2D bg1;
 
         public static SpriteFont font;
 
@@ -39,13 +41,15 @@ namespace MAH_Platformer
             // load our sprite sheet
             items = manager.Load<Texture2D>("Graphics/items");
             ui = manager.Load<Texture2D>("Graphics/ui");
+            bg1 = manager.Load<Texture2D>("Graphics/bg1");
 
             // Entities
-            LoadRegion("PlayerEntity", items, 0, 0, 16, 16);
+            LoadRegion("PlayerEntity", items, 32, 512, 32, 32);
 
             // Blocks
-            LoadRegion("AirBlock", items, 0, 0, 1, 1);
-            LoadRegion("GroundBlock", items, 0, 0, 16, 16);
+            LoadRegion("AirBlock", items, 400, 0, 1, 1);
+            LoadRegion("GroundBlock", items, 128, 0, 16, 16);
+            LoadRegion("LadderBlock", items, 96, 384, 32, 32);
 
 
             // Load UI
@@ -53,7 +57,9 @@ namespace MAH_Platformer
             LoadRegion("title", ui, 0, 0, 290, 48);
             LoadRegion("uiContainer", ui, 0, 64, 288, 128);
             LoadRegion("button", ui, 320, 64, 192, 64);
-            LoadRegion("bg", ui, 272, 192, 240, 307);
+
+            // Load bg
+            LoadRegion("bg1", bg1, 0,0, 950, 572);
 
             // Load font 
             font = manager.Load<SpriteFont>("Font/font");

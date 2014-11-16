@@ -41,7 +41,6 @@ namespace Simon.Mah.Framework
 
         public Sprite(TextureRegion region, float x, float y, float width, float height) {
             this.ZIndex = 0;
-            this.Rotation = 0;
             this.Region = region;
             this.Color = Color.White;
             this.Scale = new Vector2(1, 1);

@@ -1,6 +1,7 @@
 ﻿using MAH_Platformer.Levels.Blocks;
 using MAH_Platformer.Model;
 using MAH_Platformer.Screens;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Simon.Mah.Framework.Tools;
 using System;
@@ -37,15 +38,23 @@ namespace MAH_Platformer.View
         {
             batch.Begin(SpriteSortMode.BackToFront,
                      BlendState.AlphaBlend,
-                     SamplerState.LinearClamp,
+                     SamplerState.PointClamp,
                      null, null, null,
                      camera.GetMatrix());
+
+            
+            DrawBackground(batch);
 
             DrawBlocks(batch);
 
             DrawEntites(batch);
 
             batch.End();
+        }
+
+        private void DrawBackground(SpriteBatch batch)
+        {
+            batch.Draw(Assets.GetRegion("bg1"), new Rectangle((int)camera.GetPosition().X, (int)camera.GetPosition().Y, (int)camera.GetWidth() + 10, (int)camera.GetHeight() + 10), Assets.GetRegion("bg1"), Color.White, 0, Vector2.Zero, SpriteEffects.None, 1);
         }
 
         private void DrawBlocks(SpriteBatch batch)

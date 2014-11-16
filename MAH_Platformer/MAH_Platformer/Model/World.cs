@@ -15,7 +15,7 @@ namespace MAH_Platformer.Model
             LEFT, RIGHT, UP, DOWN
         }
 
-        public static readonly Vector2 GRAVITY = new Vector2(0, 400);
+        public static readonly Vector2 GRAVITY = new Vector2(0, 980);
 
         private Level level;
 

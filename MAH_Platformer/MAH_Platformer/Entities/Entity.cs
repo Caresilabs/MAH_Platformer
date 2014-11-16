@@ -39,36 +39,10 @@ namespace MAH_Platformer.Entities
         public virtual void Update(float delta, bool processGravity = true) // TODO hmm check if virtual is working
         {
             // Entity is moving
-            if (processGravity || IsGravity)
-            {
+            //if (processGravity || IsGravity)
+           // {
                 Vector2 oldPosition = position;
-
-                if (!Vector2.Equals(velocity, Vector2.Zero))
-                {
-                    List<World.Direction> dirs = IsFree(position.X, position.Y);
-                    if (dirs.Count != 0)
-                    {
-                       // if (dirs.Contains(World.Direction.DOWN) && !IsGrounded)
-                       // {
-                            IsGrounded = true;
-                            //position = oldPosition;
-                            velocity.Y = 0;
-                            IsGravity = false;
-                       // }
-
-                        if (dirs.Contains(World.Direction.LEFT))
-                        {
-                            //position = oldPosition;
-                            //velocity = new Vector2();
-                            //IsGravity = false;
-                        }
-                    }
-                    else 
-                    {
-                        IsGravity = true;
-                        IsGrounded = false;
-                    }
-                }
+                UpdateBounds();
 
                 if (processGravity && IsGravity)
                     velocity += Gravity * delta;
@@ -78,9 +52,31 @@ namespace MAH_Platformer.Entities
 
                 position += velocity * delta;
 
+                // Collision
+                if (!Vector2.Equals(velocity, Vector2.Zero))
+                {
+                    List<World.Direction> dirs = UpdateCollisions(position.X, position.Y);
+                    if (dirs.Count != 0)
+                    {
+                        if (dirs.Contains(World.Direction.DOWN))
+                        {
+                            IsGrounded = true;
+                            //position = oldPosition;
+                            velocity.Y = 0;
+                            IsGravity = false;
+                            OnGrounded();
+                        }
+                    }
+                    else
+                    {
+                        IsGravity = true;
+                        IsGrounded = false;
+                    }
+                }
+
                 UpdatePos(position);
-               
-            }
+
+           // }
 
             base.Update(delta);
         }
@@ -94,17 +90,18 @@ namespace MAH_Platformer.Entities
                 CurrentBlock.AddEntity(this);
             }
 
-            if (Level.GetBlock(oldPos) != CurrentBlock)
+            Vector2 newPos = oldPos + new Vector2(0, bounds.Height);
+            if (Level.GetBlock(newPos) != CurrentBlock)
             {
                 CurrentBlock.RemoveEntity(this);
 
-                CurrentBlock = Level.GetBlock(oldPos + new Vector2(0, bounds.Height + Block.BLOCK_SIZE/3 ));
+                CurrentBlock = Level.GetBlock(newPos);
 
                 Level.GetBlock(position).AddEntity(this);
             }
         }
 
-        private List<World.Direction> IsFree(float x, float y)
+        private List<World.Direction> UpdateCollisions(float x, float y)
         {
             List<World.Direction> dirs = new List<World.Direction>();
 
@@ -122,20 +119,47 @@ namespace MAH_Platformer.Entities
                 }
             }
 
-            bool blocks = false;
             Block[,] bks = Level.GetBlocks();
             for (int j = 0; j < bks.GetLength(1); j++)
+            {
                 for (int i = 0; i < bks.GetLength(0); i++)
-                    if (Level.GetBlock(i, j).Blocks(this) && Level.GetBlock(i, j).GetBounds().Intersects(bounds))
+                {
+                    Block block = Level.GetBlock(i, j);
+                    if (block is AirBlock) continue;
+
+                    if (block.Blocks(this) && block.GetBounds().Intersects(bounds))
                     {
-                        blocks = true;
-                       // position.Y = Level.GetBlock(i, j).GetBounds().Y - bounds.Height / 2 - Level.GetBlock(i, j).GetBounds().Height/2 - 5;
-                        if (x < i * Block.BLOCK_SIZE + Block.BLOCK_SIZE / 2) dirs.Add(World.Direction.LEFT);
-                        if (y < j * Block.BLOCK_SIZE + Block.BLOCK_SIZE / 2) dirs.Add(World.Direction.DOWN);
+                        Rectangle inter = Rectangle.Intersect(bounds, block.GetBounds());
+                        Vector2 norVelocity = new Vector2(velocity.X, velocity.Y);
+                        norVelocity.Normalize();
+
+                        if (inter.Height - 4 > inter.Width)
+                        {
+                            if (position.X < block.GetBounds().X)
+                                position.X -= inter.Width - 0;
+                            else
+                                position.X += inter.Width - 0;
+                        }
+                        else
+                        {
+                            if (position.Y < block.GetBounds().Y)
+                            {
+                                position.Y -= (inter.Height - 4);
+                                dirs.Add(World.Direction.DOWN);
+                            }
+                            else
+                                position.Y += (inter.Height + 1);
+                           
+                        }
                     }
+                }
+
+            }
 
             return dirs;//!blocks;
         }
+
+        public virtual void OnGrounded() { }
 
         public virtual void Collide(Entity entity) { }
 

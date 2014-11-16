@@ -7,8 +7,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Audio\pacman_beginning.xnb</Output>
-      <Time>2014-11-13T09:05:51.4533758+01:00</Time>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Audio\pacman_beginning.xnb</Output>
+      <Time>2014-11-03T15:33:02.4167073+01:00</Time>
     </Item>
     <Item>
       <Source>Audio\pacman_chomp.wav</Source>
@@ -16,8 +16,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Audio\pacman_chomp.xnb</Output>
-      <Time>2014-11-13T09:05:51.4573755+01:00</Time>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Audio\pacman_chomp.xnb</Output>
+      <Time>2014-11-03T15:33:02.376705+01:00</Time>
     </Item>
     <Item>
       <Source>Audio\pacman_death.wav</Source>
@@ -25,8 +25,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Audio\pacman_death.xnb</Output>
-      <Time>2014-11-13T09:05:51.4703776+01:00</Time>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Audio\pacman_death.xnb</Output>
+      <Time>2014-11-03T15:33:02.411707+01:00</Time>
     </Item>
     <Item>
       <Source>Graphics\items.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\items.xnb</Output>
-      <Time>2014-11-13T09:05:51.4773777+01:00</Time>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\items.xnb</Output>
+      <Time>2014-11-16T15:04:50.2096817+01:00</Time>
     </Item>
     <Item>
       <Source>Graphics\ui.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\ui.xnb</Output>
-      <Time>2014-11-13T09:05:51.4783786+01:00</Time>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\ui.xnb</Output>
+      <Time>2014-10-09T20:21:55.75441+02:00</Time>
     </Item>
     <Item>
       <Source>Font\font.spritefont</Source>
@@ -52,8 +52,26 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Font\font.xnb</Output>
-      <Time>2014-11-13T09:05:51.4753764+01:00</Time>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Font\font.xnb</Output>
+      <Time>2014-10-22T22:59:57.7352825+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\character.bmp</Source>
+      <Name>Graphics\character</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\character.xnb</Output>
+      <Time>2014-11-16T13:01:55.5178735+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\bg1.png</Source>
+      <Name>Graphics\bg1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\bg1.xnb</Output>
+      <Time>2014-11-16T15:27:00.8217884+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -62,10 +80,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_PlatformerContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Spellabbet\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_PlatformerContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -94,7 +112,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2014-08-18T15:31:39.322524+02:00</Value>
+        <Value>2014-09-09T14:33:55.0659504+02:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

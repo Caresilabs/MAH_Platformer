@@ -1,4 +1,5 @@
 ﻿using MAH_Platformer.Entities;
+using Microsoft.Xna.Framework;
 using Simon.Mah.Framework;
 using Simon.Mah.Framework.Scene2D;
 using System;
@@ -60,6 +61,10 @@ namespace MAH_Platformer.Levels.Blocks
         public int GetBaseId()
         {
             return Id - (Id % LevelIO.ID_PER_BASE);
+        }
+        public Vector2 GetPosition()
+        {
+            return position;
         }
     }
 }
