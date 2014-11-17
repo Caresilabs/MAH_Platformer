@@ -49,7 +49,7 @@ namespace Simon.Mah.Framework
             this.Effect = SpriteEffects.None;
             this.Position = new Vector2(x, y);
             this.Animations = new Animations();
-            this.DrawOffset = new Vector2(-Size.X/2, -Size.Y/2);
+            this.DrawOffset = new Vector2(Size.X/2, Size.Y/2);
 
             if (region != null)
                 this.Origin = new Vector2(region.GetSource().Width / 2, region.GetSource().Height / 2);
@@ -69,7 +69,7 @@ namespace Simon.Mah.Framework
         public void Draw(SpriteBatch batch)
         {
             if (Region != null)
-                batch.Draw(Region, Position + DrawOffset, Region, Color, Rotation, Origin, Scale * SizeScale, Effect, ZIndex);
+                batch.Draw(Region, Position - DrawOffset + size/2, Region, Color, Rotation, Origin, Scale * SizeScale, Effect, ZIndex);
         }
 
         private void UpdateSizeScale()

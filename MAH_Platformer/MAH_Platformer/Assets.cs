@@ -25,6 +25,8 @@ namespace MAH_Platformer
         public static Texture2D ui;
         public static Texture2D character;
         public static Texture2D bg1;
+        public static Texture2D bg2;
+        public static Texture2D bg3;
 
         public static SpriteFont font;
 
@@ -42,15 +44,20 @@ namespace MAH_Platformer
             items = manager.Load<Texture2D>("Graphics/items");
             ui = manager.Load<Texture2D>("Graphics/ui");
             bg1 = manager.Load<Texture2D>("Graphics/bg1");
+            bg2 = manager.Load<Texture2D>("Graphics/bg2");
+            bg3 = manager.Load<Texture2D>("Graphics/bg3");
 
             // Entities
             LoadRegion("PlayerEntity", items, 32, 512, 32, 32);
+            LoadRegion("SpawnEntity", items, 32, 512, 32, 32);
+            LoadRegion("BoulderEntity", items, 36, 390, 32, 16);
 
             // Blocks
             LoadRegion("AirBlock", items, 400, 0, 1, 1);
             LoadRegion("GroundBlock", items, 128, 1, 16, 16);
             LoadRegion("LadderBlock", items, 96, 384, 32, 32);
             LoadRegion("TeleportBlock", items, 96, 512, 32, 32);
+            LoadRegion("SpikeBlock", items, 20, 400, 32, 32);
 
 
             // Load UI

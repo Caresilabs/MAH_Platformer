@@ -1,4 +1,5 @@
-﻿using MAH_Platformer.Levels.Blocks;
+﻿using MAH_Platformer.Levels;
+using MAH_Platformer.Levels.Blocks;
 using MAH_Platformer.Model;
 using MAH_Platformer.Screens;
 using Microsoft.Xna.Framework;
@@ -13,7 +14,7 @@ namespace MAH_Platformer.View
 {
     public class WorldRenderer
     {
-        public static float WIDTH = 20; 
+        public static float WIDTH = 20;
 
         private World world;
         private Camera2D camera;
@@ -31,18 +32,19 @@ namespace MAH_Platformer.View
 
         public void LerpCamera(float x, float y, float delta)
         {
-            camera.SetPosition(camera.GetPosition().X + (x - camera.GetPosition().X) * delta * 7, camera.GetPosition().Y + ( y - camera.GetPosition().Y) * delta * 7);
+            x = MathHelper.Clamp(x, 0, Level.WIDTH - camera.GetWidth());
+            camera.SetPosition(camera.GetPosition().X + (x - camera.GetPosition().X) * delta * 7, camera.GetPosition().Y + (y - camera.GetPosition().Y) * delta * 7);
         }
 
         public void Render(SpriteBatch batch)
         {
             batch.Begin(SpriteSortMode.BackToFront,
                      BlendState.AlphaBlend,
-                     SamplerState.PointClamp,
+                     SamplerState.PointWrap,
                      null, null, null,
                      camera.GetMatrix());
 
-            
+
             DrawBackground(batch);
 
             DrawBlocks(batch);
@@ -54,7 +56,19 @@ namespace MAH_Platformer.View
 
         private void DrawBackground(SpriteBatch batch)
         {
-            batch.Draw(Assets.GetRegion("bg1"), new Rectangle((int)camera.GetPosition().X, (int)camera.GetPosition().Y, (int)camera.GetWidth() + 10, (int)camera.GetHeight() + 10), Assets.GetRegion("bg1"), Color.White, 0, Vector2.Zero, SpriteEffects.None, 1);
+            // BG
+            batch.Draw(Assets.GetRegion("bg1"), new Rectangle((int)camera.GetPosition().X, (int)camera.GetPosition().Y - 6, (int)camera.GetWidth() + 10, (int)camera.GetHeight() + 10), Assets.GetRegion("bg1"), Color.White, 0, Vector2.Zero, SpriteEffects.None, 1);
+
+            //bg 2
+            var source = new Rectangle((int)(camera.GetPosition().X * .1f), 0, Assets.GetRegion("bg1").GetTexture().Width, (int)(Assets.GetRegion("bg1").GetTexture().Height/1.6f));
+
+            batch.Draw(Assets.bg2, new Rectangle((int)camera.GetPosition().X, (int)camera.GetPosition().Y - 6, (int)camera.GetWidth() + 10, (int)camera.GetHeight() + 10),
+                source, Color.White, 0, Vector2.Zero, SpriteEffects.None, .9f);
+
+            // Clouds
+            source = new Rectangle((int)(camera.GetPosition().X * .18f), 0, Assets.bg3.Width, (int)(Assets.bg3.Height / 1.6f));
+            batch.Draw(Assets.bg3, new Rectangle((int)camera.GetPosition().X, (int)camera.GetPosition().Y - 6, (int)camera.GetWidth() + 10, (int)camera.GetHeight() + 10),
+                source, Color.White, 0, Vector2.Zero, SpriteEffects.None, .87f);
         }
 
         private void DrawBlocks(SpriteBatch batch)
@@ -72,7 +86,7 @@ namespace MAH_Platformer.View
 
         private void DrawEntites(SpriteBatch batch)
         {
-            foreach (var entity in world.GetLevel().GetEntities()) 
+            foreach (var entity in world.GetLevel().GetEntities())
             {
                 entity.Draw(batch);
             }

@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\items.xnb</Output>
-      <Time>2014-11-16T15:04:50.2096817+01:00</Time>
+      <Time>2014-11-17T20:57:35.2153565+01:00</Time>
     </Item>
     <Item>
       <Source>Graphics\ui.png</Source>
@@ -72,6 +72,24 @@
       <Options>None</Options>
       <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\bg1.xnb</Output>
       <Time>2014-11-16T15:27:00.8217884+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\bg2.png</Source>
+      <Name>Graphics\bg2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\bg2.xnb</Output>
+      <Time>2014-11-17T21:58:49.2655002+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\bg3.png</Source>
+      <Name>Graphics\bg3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\bg3.xnb</Output>
+      <Time>2014-11-17T22:06:48.2078941+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

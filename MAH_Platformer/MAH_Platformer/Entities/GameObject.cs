@@ -35,8 +35,8 @@ namespace MAH_Platformer.Entities
 
         public void UpdateBounds()
         {
-            bounds.X = (int)position.X - (bounds.Width / 2);
-            bounds.Y = (int)position.Y - bounds.Height / 2;
+            bounds.X = (int)(position.X - (bounds.Width / 2));
+            bounds.Y = (int)(position.Y - (bounds.Height / 2));
         }
 
         public void SetPosition(Vector2 pos)

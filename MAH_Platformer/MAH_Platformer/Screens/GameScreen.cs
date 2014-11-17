@@ -20,8 +20,8 @@ namespace MAH_Platformer.Screens
 
         public override void Init()
         {
-            Block.BLOCK_SIZE = 720 / WorldRenderer.WIDTH;
-            this.camera = new Camera2D(GetGraphics(), 720, 480);
+            Block.BLOCK_SIZE = 1280 / WorldRenderer.WIDTH;
+            this.camera = new Camera2D(GetGraphics(), 1280, 720);
             this.world = new World();
             this.renderer = new WorldRenderer(this);
         }
@@ -32,7 +32,7 @@ namespace MAH_Platformer.Screens
             renderer.Update(delta);
 
             if (!world.GetLevel().GetPlayer().Alive)
-                Init();
+                world.GetLevel().GetPlayer().Respawn();
         }
 
         public override void Draw(SpriteBatch batch)

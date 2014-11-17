@@ -2,11 +2,11 @@
 
 Basic Entities:
 	[
-		Bob
+		Bob |C
 		Big bad Boss
-		Boulder
+		Boulder |C
 		Little Steve
-		Save Point
+		Save Point |C
 	]
 
 	*? = Low Priority

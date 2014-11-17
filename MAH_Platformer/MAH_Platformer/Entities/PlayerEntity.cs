@@ -11,12 +11,12 @@ namespace MAH_Platformer.Entities
 {
     public class PlayerEntity : Entity
     {
-        public const float WIDTH = 28;
-        public const float HEIGHT = 52;
+        public const float WIDTH = 46;
+        public const float HEIGHT = 96;
 
-        public const float DEFAULT_SPEED = 100;
-        public const float DEFAULT_JUMP = -440;
-        public const float MAX_SPEED = 750;
+        public const float DEFAULT_SPEED = 170;
+        public const float DEFAULT_JUMP = -640;
+        public const float MAX_SPEED = 1050;
 
         public enum PlayerState
         {
@@ -24,6 +24,7 @@ namespace MAH_Platformer.Entities
         }
 
         private PlayerState state;
+        private Vector2 spawnPoint;
         private float speed;
         private int jumps;
 
@@ -31,6 +32,7 @@ namespace MAH_Platformer.Entities
             : base(region, x, y, WIDTH, HEIGHT)
         {
             this.speed = DEFAULT_SPEED;
+            this.spawnPoint = new Vector2();
             this.jumps = 0;
             this.state = PlayerState.IDLE;
         }
@@ -115,7 +117,7 @@ namespace MAH_Platformer.Entities
         public void Jump()
         {
             state = PlayerState.JUMPING;
-            position.Y -= 9;
+            position.Y -= 6;
             velocity.Y = DEFAULT_JUMP;
             IsGravity = true;
             IsGrounded = false;
@@ -128,9 +130,26 @@ namespace MAH_Platformer.Entities
             this.jumps = 0;
         }
 
+        public void Respawn()
+        {
+            position.X = spawnPoint.X;
+            position.Y = spawnPoint.Y - bounds.Height;
+
+            jumps = 0;
+            state = PlayerState.IDLE;
+            IsGrounded = false;
+            Alive = true;
+        }
+
         public PlayerState GetState()
         {
             return state;
+        }
+
+        public void SetSpawn(float x, float y)
+        {
+            spawnPoint.X = x;
+            spawnPoint.Y = y;
         }
 
     }

@@ -73,11 +73,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets.cs" />
+    <Compile Include="Entities\BulletEntity.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\GameObject.cs" />
     <Compile Include="Entities\PlayerEntity.cs" />
+    <Compile Include="Entities\BoulderEntity.cs" />
+    <Compile Include="Entities\SpawnEntity.cs" />
     <Compile Include="HighscoreManager.cs" />
     <Compile Include="LevelIO.cs" />
+    <Compile Include="Levels\Blocks\SpikeBlock.cs" />
     <Compile Include="Levels\Blocks\TeleportBlock.cs" />
     <Compile Include="Levels\Blocks\LadderBlock.cs" />
     <Compile Include="Levels\Blocks\SolidBlock.cs" />

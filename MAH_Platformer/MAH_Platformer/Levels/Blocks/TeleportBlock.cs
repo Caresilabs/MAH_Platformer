@@ -26,7 +26,7 @@ namespace MAH_Platformer.Levels.Blocks
                 block = Level.GetBlockById(Id - 1);
 
              entity.SetPosition(block.GetPosition() - new Vector2(0, entity.GetBounds().Height));
-            float vy = Math.Min(-300, entity.GetVelocity().Y * -.9f);
+            float vy = Math.Min(-300, entity.GetVelocity().Y * -.89f);
              entity.SetVelocity(0, vy);
         }
 

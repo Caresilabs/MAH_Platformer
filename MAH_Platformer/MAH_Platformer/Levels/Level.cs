@@ -12,17 +12,22 @@ namespace MAH_Platformer.Levels
     {
         public const int MAX_ID = 512;
 
+        public static float WIDTH;
+        public static float HEIGHT;
+
         public enum Blocks
         {
             AIR,
             GROUND,
-            Ladder,
-            Teleport
+            LADDER,
+            TELEPORT,
+            SPIKE
         }
 
         public enum Entities
         {
             PLAYER = (MAX_ID/LevelIO.ID_PER_BASE) / 2, // Start from middle
+            SPAWN,
             BOULDER
         }
 
@@ -30,9 +35,6 @@ namespace MAH_Platformer.Levels
         private Block[,] blocks;
         private Vector2 lastCheckPoint;
         private PlayerEntity player;
-
-        private int width;
-        private int height;
 
         public Level()
         {
@@ -42,9 +44,15 @@ namespace MAH_Platformer.Levels
         public void Update(float delta)
         {
             // update entities
-            foreach (var entity in entities)
+            for (int i = 0; i < entities.Count; i++)
             {
+                Entity entity = entities[i];
+
                 entity.Update(delta);
+                if (!entity.Alive && entity is PlayerEntity == false)
+                {
+                    entities.Remove(entity);
+                }
             }
 
             // Update blocks
@@ -61,10 +69,10 @@ namespace MAH_Platformer.Levels
         {
             int[,] loadedMap = LevelIO.ReadLevel(1); //todo
 
-            this.width = loadedMap.GetLength(0); // TODO
-            this.height = loadedMap.GetLength(1);
+            WIDTH = loadedMap.GetLength(0) * Block.BLOCK_SIZE; // TODO
+            HEIGHT = loadedMap.GetLength(1) * Block.BLOCK_SIZE;
 
-            this.blocks = new Block[width, height];
+            this.blocks = new Block[loadedMap.GetLength(0), loadedMap.GetLength(1)];
 
             // Load blocks
             for (int j = 0; j < loadedMap.GetLength(1); j++)
@@ -106,12 +114,15 @@ namespace MAH_Platformer.Levels
                 return;
 
             string nameSpace = "MAH_Platformer.Entities" + "."; // - Enum.GetValues(typeof(Blocks)).Cast<int>().Max()
-            string name = Capitalise(((Entities)baseId + Enum.GetValues(typeof(Entities)).Cast<int>().Min()).ToString()) + "Entity";
+            string name = Capitalise(((Entities)(baseId / LevelIO.ID_PER_BASE) + Enum.GetValues(typeof(Entities)).Cast<int>().Min()).ToString()) + "Entity";
             var objType = Type.GetType(nameSpace + name, true);
             Entity entity = (Entity)Activator.CreateInstance(objType, Assets.GetRegion(name), x * Block.BLOCK_SIZE, y * Block.BLOCK_SIZE);
 
             if (entity is PlayerEntity)
+            {
                 player = (PlayerEntity)entity;
+                player.SetSpawn(x * Block.BLOCK_SIZE, y * Block.BLOCK_SIZE);
+            }
 
             AddEntity(entity);
         }

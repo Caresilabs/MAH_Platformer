@@ -37,6 +37,10 @@ namespace MAH_Platformer.Levels.Blocks
         {
         }
 
+        public virtual void Collide(Entity entity)
+        {
+        }
+
         public virtual bool Blocks(Entity entity)
         {
             return BlocksMotion;

@@ -6,5 +6,7 @@ Content\Graphics\ui.xnb
 Content\Font\font.xnb
 Content\Graphics\character.xnb
 Content\Graphics\bg1.xnb
+Content\Graphics\bg2.xnb
+Content\Graphics\bg3.xnb
 Content\levels.txt
 Content\highscore.dat

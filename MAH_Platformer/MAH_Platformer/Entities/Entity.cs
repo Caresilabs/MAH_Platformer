@@ -18,11 +18,15 @@ namespace MAH_Platformer.Entities
 
         public Block CurrentBlock { get; set; }
 
+        public bool Collision { get; set; }
+
         public bool IsGravity { get; set; }
 
         public bool IsGrounded { get; set; }
 
         public bool Alive { get; set; }
+
+        public float FrictionModifier { get; set; }
 
         protected Vector2 velocity;
 
@@ -32,7 +36,9 @@ namespace MAH_Platformer.Entities
             this.IsGravity = true;
             this.Alive = true;
             this.IsGrounded = false;
+            this.Collision = true;
             this.velocity = new Vector2();
+            this.FrictionModifier = 1;
             this.Gravity = World.GRAVITY;
         }
 
@@ -42,20 +48,21 @@ namespace MAH_Platformer.Entities
             //if (processGravity || IsGravity)
            // {
                 Vector2 oldPosition = position;
-                UpdateBounds();
 
                 if (processGravity && IsGravity)
                     velocity += Gravity * delta;
 
                 if (CurrentBlock != null)
-                    velocity *= CurrentBlock.GetFriction(this);
+                    velocity *= MathHelper.Clamp(CurrentBlock.GetFriction(this) * FrictionModifier, 0, 1);
 
                 position += velocity * delta;
+
+                UpdateBounds();
 
                 // Collision
                 if (!Vector2.Equals(velocity, Vector2.Zero))
                 {
-                    List<World.Direction> dirs = UpdateCollisions(position.X, position.Y);
+                    List<World.Direction> dirs = UpdateCollisions();
                     if (dirs.Count != 0)
                     {
                         if (dirs.Contains(World.Direction.DOWN))
@@ -101,7 +108,7 @@ namespace MAH_Platformer.Entities
             }
         }
 
-        private List<World.Direction> UpdateCollisions(float x, float y)
+        private List<World.Direction> UpdateCollisions()
         {
             List<World.Direction> dirs = new List<World.Direction>();
 
@@ -115,7 +122,9 @@ namespace MAH_Platformer.Entities
                 {
                     e.Collide(this);
                     this.Collide(e);
-                    return dirs; // TODO!!!!
+
+                    if (e.Collision)
+                        ProcessCollision(dirs, e.bounds);
                 }
             }
 
@@ -125,38 +134,43 @@ namespace MAH_Platformer.Entities
                 for (int i = 0; i < bks.GetLength(0); i++)
                 {
                     Block block = Level.GetBlock(i, j);
-                    if (block is AirBlock) continue;
 
                     if (block.Blocks(this) && block.GetBounds().Intersects(bounds))
                     {
-                        Rectangle inter = Rectangle.Intersect(bounds, block.GetBounds());
-                        Vector2 norVelocity = new Vector2(velocity.X, velocity.Y);
-                        norVelocity.Normalize();
-
-                        if (inter.Height - 4 > inter.Width)
-                        {
-                            if (position.X < block.GetBounds().X)
-                                position.X -= inter.Width - 0;
-                            else
-                                position.X += inter.Width - 0;
-                        }
-                        else
-                        {
-                            if (position.Y < block.GetBounds().Y)
-                            {
-                                position.Y -= (inter.Height - 4);
-                                dirs.Add(World.Direction.DOWN);
-                            }
-                            else
-                                position.Y += (inter.Height + 1);
-                           
-                        }
+                        block.Collide(this);
+                        ProcessCollision(dirs, block.GetBounds());
                     }
                 }
 
             }
 
-            return dirs;//!blocks;
+            return dirs;
+        }
+
+        private void ProcessCollision(List<World.Direction> dirs, Rectangle tBounds)
+        {
+            Rectangle inter = Rectangle.Intersect(bounds, tBounds);
+            Vector2 norVelocity = new Vector2(velocity.X, velocity.Y);
+            norVelocity.Normalize();
+
+            if (inter.Height - 4 > inter.Width)
+            {
+                if (position.X < tBounds.X)
+                    position.X -= inter.Width - 0;
+                else
+                    position.X += inter.Width - 0;
+            }
+            else
+            {
+                if (position.Y < tBounds.Y)
+                {
+                    position.Y -= (inter.Height - 1);
+                    dirs.Add(World.Direction.DOWN);
+                }
+                else
+                    position.Y += (inter.Height + 1);
+
+            }
         }
 
         public virtual void OnGrounded() { }
