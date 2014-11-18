@@ -78,9 +78,11 @@
     <Compile Include="Entities\GameObject.cs" />
     <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="Entities\BoulderEntity.cs" />
+    <Compile Include="Entities\EnemyEntitiy.cs" />
     <Compile Include="Entities\SpawnEntity.cs" />
     <Compile Include="HighscoreManager.cs" />
     <Compile Include="LevelIO.cs" />
+    <Compile Include="Levels\Blocks\JumpBlock.cs" />
     <Compile Include="Levels\Blocks\SpikeBlock.cs" />
     <Compile Include="Levels\Blocks\TeleportBlock.cs" />
     <Compile Include="Levels\Blocks\LadderBlock.cs" />
@@ -136,7 +138,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

@@ -26,6 +26,7 @@ namespace MAH_Platformer.Entities
         {
             sprite.SetPosition(position);
             UpdateBounds();
+            sprite.Update(delta);
         }
 
         public virtual void Draw(SpriteBatch batch)

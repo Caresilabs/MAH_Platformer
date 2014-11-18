@@ -18,6 +18,9 @@ namespace MAH_Platformer.Entities
         public const float DEFAULT_JUMP = -640;
         public const float MAX_SPEED = 1050;
 
+        public const float SHOOT_DELAY = .13f;
+        public const float SHOOT_SPEED = 500f;
+
         public enum PlayerState
         {
             RUNNING, CLIMBING, IDLE, JUMPING
@@ -25,7 +28,9 @@ namespace MAH_Platformer.Entities
 
         private PlayerState state;
         private Vector2 spawnPoint;
+        private Point direction;
         private float speed;
+        private float reloadTime;
         private int jumps;
 
         public PlayerEntity(TextureRegion region, float x, float y)
@@ -33,11 +38,27 @@ namespace MAH_Platformer.Entities
         {
             this.speed = DEFAULT_SPEED;
             this.spawnPoint = new Vector2();
+            this.direction = new Point(1, 0);
             this.jumps = 0;
+            this.reloadTime = 0;
             this.state = PlayerState.IDLE;
+            this.sprite.Effect = Microsoft.Xna.Framework.Graphics.SpriteEffects.FlipVertically;
         }
 
         public override void Update(float delta, bool processGravity = true)
+        {
+            this.reloadTime += delta;
+
+            UpdateInput();
+            UpdateStates(delta);
+            
+            UpdateDirection(delta);
+
+            velocity.Y = MathHelper.Clamp(velocity.Y, -MAX_SPEED, MAX_SPEED);
+            base.Update(delta, state != PlayerState.CLIMBING);
+        }
+
+        private void UpdateInput()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
@@ -64,6 +85,11 @@ namespace MAH_Platformer.Entities
                     Jump();
             }
 
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                Shoot();
+            }
+
             if (state == PlayerState.CLIMBING)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.W))
@@ -73,23 +99,37 @@ namespace MAH_Platformer.Entities
                 else
                     velocity.Y = 0;
             }
+        }
 
+        private void UpdateDirection(float delta)
+        {
+            if (velocity.X > 0) direction.X = 1;
+            if (velocity.X < 0) direction.X = -1;
+            if (velocity.Y > 0) direction.Y = 1;
+            if (velocity.Y < 0) direction.Y = -1;
+        }
+
+        private void Shoot()
+        {
+            if (reloadTime > SHOOT_DELAY)
+            {
+                BulletEntity bullet = new BulletEntity(Assets.GetRegion("BoulderEntity"),
+                    position.X, position.Y, velocity.X + direction.X * SHOOT_SPEED, 0);
+                bullet.Owner = this;
+                Level.AddEntity(bullet);
+                reloadTime = 0;
+            }
+        }
+
+        private void UpdateStates(float delta)
+        {
+            // Check for death
             if (position.Y > Level.GetBlocks().GetLength(1) * Block.BLOCK_SIZE)
             {
                 Alive = false;
             }
 
-            UpdateStates(delta);
-
-            velocity.Y = MathHelper.Clamp(velocity.Y, -MAX_SPEED, MAX_SPEED);
-
-            base.Update(delta, state != PlayerState.CLIMBING);
-        }
-
-        private void UpdateStates(float delta)
-        {
             // Check for ladder
-
             if (Level.GetBlock(position) is LadderBlock)
             {
                 if (!Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.S)) return;
@@ -101,7 +141,7 @@ namespace MAH_Platformer.Entities
                 state = PlayerState.CLIMBING;
                 IsGravity = false;
                 OnGrounded();
-                velocity = new Microsoft.Xna.Framework.Vector2();
+                velocity = new Vector2();
             }
             else
             {

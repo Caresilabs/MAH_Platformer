@@ -1,29 +1,27 @@
-﻿using MAH_Platformer.Entities;
-using Microsoft.Xna.Framework;
+﻿using MAH_Platformer.Levels.Blocks;
 using Simon.Mah.Framework.Scene2D;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MAH_Platformer.Levels.Blocks
+namespace MAH_Platformer.Entities
 {
-    public class SpikeBlock : SolidBlock
+    public class EnemyEntitiy : Entity
     {
-         public SpikeBlock(TextureRegion region, int x, int y)
-            : base(region, x, y)
+        public EnemyEntitiy(TextureRegion region, float x, float y)
+            : base(region, x, y, Block.BLOCK_SIZE, Block.BLOCK_SIZE)
         {
         }
 
         public override void Collide(Entity entity)
         {
-            base.Enter(entity);
+            base.Collide(entity);
 
             if (entity is PlayerEntity)
             {
                 ((PlayerEntity)entity).Respawn();
             }
         }
-
     }
 }

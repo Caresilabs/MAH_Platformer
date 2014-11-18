@@ -76,8 +76,11 @@ namespace MAH_Platformer.Entities
                     }
                     else
                     {
-                        IsGravity = true;
-                        IsGrounded = false;
+                        if (processGravity)
+                        {
+                            IsGravity = true;
+                            IsGrounded = false;
+                        }
                     }
                 }
 
@@ -123,7 +126,7 @@ namespace MAH_Platformer.Entities
                     e.Collide(this);
                     this.Collide(e);
 
-                    if (e.Collision)
+                    if (e.Collision && Collision)
                         ProcessCollision(dirs, e.bounds);
                 }
             }
@@ -135,10 +138,11 @@ namespace MAH_Platformer.Entities
                 {
                     Block block = Level.GetBlock(i, j);
 
-                    if (block.Blocks(this) && block.GetBounds().Intersects(bounds))
+                    if (block.GetBounds().Intersects(bounds))
                     {
                         block.Collide(this);
-                        ProcessCollision(dirs, block.GetBounds());
+                        if (block.Blocks(this))
+                            ProcessCollision(dirs, block.GetBounds());
                     }
                 }
 
@@ -159,6 +163,8 @@ namespace MAH_Platformer.Entities
                     position.X -= inter.Width - 0;
                 else
                     position.X += inter.Width - 0;
+
+                velocity.X = 0;
             }
             else
             {
@@ -168,8 +174,9 @@ namespace MAH_Platformer.Entities
                     dirs.Add(World.Direction.DOWN);
                 }
                 else
-                    position.Y += (inter.Height + 1);
+                    position.Y += (inter.Height + 2);
 
+                velocity.Y = 0;
             }
         }
 

@@ -17,11 +17,12 @@ namespace MAH_Platformer.Levels
 
         public enum Blocks
         {
-            AIR,
-            GROUND,
-            LADDER,
-            TELEPORT,
-            SPIKE
+            AIR,        // 0
+            GROUND,     // 8
+            LADDER,     // 16
+            TELEPORT,   // 24
+            SPIKE,      // 32
+            JUMP        // 40
         }
 
         public enum Entities
@@ -33,7 +34,6 @@ namespace MAH_Platformer.Levels
 
         private List<Entity> entities;
         private Block[,] blocks;
-        private Vector2 lastCheckPoint;
         private PlayerEntity player;
 
         public Level()

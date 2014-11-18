@@ -15,15 +15,22 @@ namespace MAH_Platformer.Entities
             this.FrictionModifier = 1.1f;
         }
 
+        public override void Update(float delta, bool processGravity = true)
+        {
+            sprite.Rotation += velocity.X * delta / 60;
+
+            base.Update(delta, processGravity);
+        }
+
         public override void Collide(Entity entity)
         {
             base.Collide(entity);
 
-            if (entity is PlayerEntity)
-            {
+           // if (entity is Entity)
+           // {
                 if (bounds.Top < entity.GetBounds().Bottom - 16)
-                    velocity.X = ((PlayerEntity)entity).GetVelocity().X*2;
-            }
+                    velocity.X = entity.GetVelocity().X * 2;//((PlayerEntity)entity).GetVelocity().X*2;
+           // }
         }
     }
 }

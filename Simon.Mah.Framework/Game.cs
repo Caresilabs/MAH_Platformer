@@ -11,9 +11,10 @@ namespace Simon.Mah.Framework
 {
     public abstract class Game : Microsoft.Xna.Framework.Game
     {
-         public const string GAME_NAME = "Hello XNA";
+        public static string GAME_NAME = "Hello XNA";
 
         protected static GraphicsDeviceManager graphics;
+
         protected SpriteBatch spriteBatch;
         protected Screen currentScreen;
 

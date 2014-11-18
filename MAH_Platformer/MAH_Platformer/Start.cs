@@ -26,6 +26,8 @@ namespace MAH_Platformer
 
             IsMouseVisible = true;
             Window.AllowUserResizing = true;
+
+            GAME_NAME = "Bob's Quest for Sky Haven City";
             Window.Title = GAME_NAME + " by [Simon Bothen]"; //  set title to our game name
         }
 

@@ -43,7 +43,6 @@ namespace MAH_Platformer.Screens
                       SamplerState.LinearClamp,
                       null, null, null,
                       camera.GetMatrix());
-            batch.Draw(Assets.GetRegion("pixel"), new Rectangle(1, 1, 10, 10), Assets.GetRegion("pixel"), Color.Magenta);
 
             batch.End();
         }

@@ -8,22 +8,20 @@ using System.Text;
 
 namespace MAH_Platformer.Levels.Blocks
 {
-    public class SpikeBlock : SolidBlock
+    public class JumpBlock : Block
     {
-         public SpikeBlock(TextureRegion region, int x, int y)
+        private float speed = -400;
+        public JumpBlock(TextureRegion region, int x, int y)
             : base(region, x, y)
         {
+            this.BlocksMotion = false;
         }
 
         public override void Collide(Entity entity)
         {
             base.Enter(entity);
 
-            if (entity is PlayerEntity)
-            {
-                ((PlayerEntity)entity).Respawn();
-            }
+            entity.SetVelocity(entity.GetVelocity().X,Math.Min(-Math.Abs(entity.GetVelocity().Y) + speed, -600));
         }
-
     }
 }
