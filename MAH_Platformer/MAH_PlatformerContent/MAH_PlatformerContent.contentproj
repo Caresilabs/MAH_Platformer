@@ -72,13 +72,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\character.bmp">
-      <Name>character</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Graphics\bg1.png">
       <Name>bg1</Name>
       <Importer>TextureImporter</Importer>
@@ -95,6 +88,13 @@
   <ItemGroup>
     <Compile Include="Graphics\bg3.png">
       <Name>bg3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\character.png">
+      <Name>character</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

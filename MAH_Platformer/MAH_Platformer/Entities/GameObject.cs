@@ -11,7 +11,8 @@ namespace MAH_Platformer.Entities
 {
     public abstract class GameObject
     {
-        protected Sprite sprite;
+        public Sprite sprite;
+
         protected Rectangle bounds;
         protected Vector2 position;
 

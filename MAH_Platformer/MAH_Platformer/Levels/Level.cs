@@ -22,24 +22,23 @@ namespace MAH_Platformer.Levels
             LADDER,     // 16
             TELEPORT,   // 24
             SPIKE,      // 32
-            JUMP        // 40
+            JUMP,        // 40
+            GOAL         // 48
         }
 
         public enum Entities
         {
-            PLAYER = (MAX_ID/LevelIO.ID_PER_BASE) / 2, // Start from middle
-            SPAWN,
-            BOULDER
+            PLAYER = (MAX_ID/LevelIO.ID_PER_BASE) / 2, //256
+            SPAWN,                                     // 264
+            BOULDER,                                   // 272
+            ENEMY                                      // 280
         }
+
+        public int CurrentLevel { get; private set; }
 
         private List<Entity> entities;
         private Block[,] blocks;
         private PlayerEntity player;
-
-        public Level()
-        {
-            this.entities = new List<Entity>();
-        }
 
         public void Update(float delta)
         {
@@ -67,12 +66,15 @@ namespace MAH_Platformer.Levels
 
         public void InitLevel(int level = 1)
         {
-            int[,] loadedMap = LevelIO.ReadLevel(1); //todo
+            this.entities = new List<Entity>();
+
+            int[,] loadedMap = LevelIO.ReadLevel(level); //todo
 
             WIDTH = loadedMap.GetLength(0) * Block.BLOCK_SIZE; // TODO
             HEIGHT = loadedMap.GetLength(1) * Block.BLOCK_SIZE;
 
             this.blocks = new Block[loadedMap.GetLength(0), loadedMap.GetLength(1)];
+            this.CurrentLevel = level;
 
             // Load blocks
             for (int j = 0; j < loadedMap.GetLength(1); j++)
@@ -196,6 +198,13 @@ namespace MAH_Platformer.Levels
         public PlayerEntity GetPlayer()
         {
             return player;
+        }
+
+        public void NextLevel()
+        {
+            if (CurrentLevel + 1 > LevelIO.LEVEL_MAX) return;
+            CurrentLevel++;
+            InitLevel(CurrentLevel);
         }
     }
 }

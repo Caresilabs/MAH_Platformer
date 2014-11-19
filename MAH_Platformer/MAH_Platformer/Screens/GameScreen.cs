@@ -14,9 +14,13 @@ namespace MAH_Platformer.Screens
 {
     public class GameScreen : Screen
     {
+        private const int START_SCORE = 20000;
+
         private Camera2D camera;
         private World world;
         private WorldRenderer renderer;
+       
+        private float score;
 
         public override void Init()
         {
@@ -24,10 +28,13 @@ namespace MAH_Platformer.Screens
             this.camera = new Camera2D(GetGraphics(), 1280, 720);
             this.world = new World();
             this.renderer = new WorldRenderer(this);
+            this.score = START_SCORE;
         }
 
         public override void Update(float delta)
         {
+            this.score -= delta*183;
+
             world.Update(delta);
             renderer.Update(delta);
 
@@ -38,13 +45,6 @@ namespace MAH_Platformer.Screens
         public override void Draw(SpriteBatch batch)
         {
             renderer.Render(batch);
-            batch.Begin(SpriteSortMode.BackToFront,
-                      BlendState.AlphaBlend,
-                      SamplerState.LinearClamp,
-                      null, null, null,
-                      camera.GetMatrix());
-
-            batch.End();
         }
 
         public override void Dispose()
@@ -59,6 +59,11 @@ namespace MAH_Platformer.Screens
         public World GetWorld()
         {
             return world;
+        }
+
+        public int GetScore()
+        {
+            return (int)score;
         }
     }
 }

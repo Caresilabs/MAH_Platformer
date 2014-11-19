@@ -29,17 +29,11 @@ namespace MAH_Platformer.Levels.Blocks
             this.sprite.ZIndex = .5f;
         }
 
-        public virtual void Use(string item)
-        {
-        }
+        public virtual void Use(string item) { }
 
-        public virtual void Enter(Entity entity)
-        {
-        }
+        public virtual void Enter(Entity entity) { }
 
-        public virtual void Collide(Entity entity)
-        {
-        }
+        public virtual void Collide(Entity entity) { }
 
         public virtual bool Blocks(Entity entity)
         {

@@ -15,7 +15,7 @@ namespace MAH_Platformer.Levels.Blocks
         public TeleportBlock(TextureRegion region, int x, int y)
             : base(region, x, y)
         {
-            this.sprite.AddAnimation("idle", new FrameAnimation(Assets.items, 0, 96, 32, 2, MathUtils.random(.2f, .4f))).SetAnimation("idle");
+            this.sprite.AddAnimation("idle", new FrameAnimation(Assets.items, 0, 96, 32,32, 2, MathUtils.random(.2f, .4f))).SetAnimation("idle");
         }
 
         public override void Enter(Entity entity)

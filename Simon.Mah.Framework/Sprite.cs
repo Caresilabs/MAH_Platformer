@@ -123,5 +123,10 @@ namespace Simon.Mah.Framework
             UpdateSizeScale();
             return this;
         }
+
+        public Vector2 GetRealScale()
+        {
+            return Scale * SizeScale;
+        }
     }
 }

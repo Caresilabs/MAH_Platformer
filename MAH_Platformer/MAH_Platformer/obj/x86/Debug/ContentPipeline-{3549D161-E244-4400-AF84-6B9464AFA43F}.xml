@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\ui.xnb</Output>
-      <Time>2014-10-09T20:21:55.75441+02:00</Time>
+      <Time>2014-11-19T17:50:37.4679648+01:00</Time>
     </Item>
     <Item>
       <Source>Font\font.spritefont</Source>
@@ -54,15 +54,6 @@
       <Options>None</Options>
       <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Font\font.xnb</Output>
       <Time>2014-10-22T22:59:57.7352825+02:00</Time>
-    </Item>
-    <Item>
-      <Source>Graphics\character.bmp</Source>
-      <Name>Graphics\character</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\character.xnb</Output>
-      <Time>2014-11-16T13:01:55.5178735+01:00</Time>
     </Item>
     <Item>
       <Source>Graphics\bg1.png</Source>
@@ -90,6 +81,15 @@
       <Options>None</Options>
       <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\bg3.xnb</Output>
       <Time>2014-11-17T22:06:48.2078941+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\character.png</Source>
+      <Name>Graphics\character</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\character.xnb</Output>
+      <Time>2014-11-18T14:24:04.4193747+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

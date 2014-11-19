@@ -33,6 +33,7 @@ namespace MAH_Platformer.Entities
         public Entity(TextureRegion region, float x, float y, float width, float height)
             : base(region, x, y, width, height)
         {
+            this.sprite.ZIndex = .3f;
             this.IsGravity = true;
             this.Alive = true;
             this.IsGrounded = false;
@@ -46,47 +47,47 @@ namespace MAH_Platformer.Entities
         {
             // Entity is moving
             //if (processGravity || IsGravity)
-           // {
-                Vector2 oldPosition = position;
+            // {
+            Vector2 oldPosition = position;
 
-                if (processGravity && IsGravity)
-                    velocity += Gravity * delta;
+            if (processGravity && IsGravity)
+                velocity += Gravity * delta;
 
-                if (CurrentBlock != null)
-                    velocity *= MathHelper.Clamp(CurrentBlock.GetFriction(this) * FrictionModifier, 0, 1);
+            if (CurrentBlock != null)
+                velocity *= MathHelper.Clamp(CurrentBlock.GetFriction(this) * FrictionModifier, 0, 1);
 
-                position += velocity * delta;
+            position += velocity * delta;
 
-                UpdateBounds();
+            UpdateBounds();
 
-                // Collision
-                if (!Vector2.Equals(velocity, Vector2.Zero))
+            // Collision
+            if (!Vector2.Equals(velocity, Vector2.Zero))
+            {
+                List<World.Direction> dirs = UpdateCollisions();
+                if (dirs.Count != 0)
                 {
-                    List<World.Direction> dirs = UpdateCollisions();
-                    if (dirs.Count != 0)
+                    if (dirs.Contains(World.Direction.DOWN))
                     {
-                        if (dirs.Contains(World.Direction.DOWN))
-                        {
-                            IsGrounded = true;
-                            //position = oldPosition;
-                            velocity.Y = 0;
-                            IsGravity = false;
-                            OnGrounded();
-                        }
-                    }
-                    else
-                    {
-                        if (processGravity)
-                        {
-                            IsGravity = true;
-                            IsGrounded = false;
-                        }
+                        IsGrounded = true;
+                        //position = oldPosition;
+                        velocity.Y = 0;
+                        IsGravity = false;
+                        OnGrounded();
                     }
                 }
+                else
+                {
+                    if (processGravity)
+                    {
+                        IsGravity = true;
+                        IsGrounded = false;
+                    }
+                }
+            }
 
-                UpdatePos(position);
+            UpdatePos(position);
 
-           // }
+            // }
 
             base.Update(delta);
         }
@@ -137,12 +138,15 @@ namespace MAH_Platformer.Entities
                 for (int i = 0; i < bks.GetLength(0); i++)
                 {
                     Block block = Level.GetBlock(i, j);
+                    if (block is AirBlock) continue;
 
                     if (block.GetBounds().Intersects(bounds))
                     {
+                        //if (PixelCollition(block)) {
                         block.Collide(this);
                         if (block.Blocks(this))
                             ProcessCollision(dirs, block.GetBounds());
+                        //}
                     }
                 }
 
@@ -174,7 +178,7 @@ namespace MAH_Platformer.Entities
                     dirs.Add(World.Direction.DOWN);
                 }
                 else
-                    position.Y += (inter.Height + 2);
+                    position.Y += (inter.Height +4);
 
                 velocity.Y = 0;
             }
@@ -200,32 +204,35 @@ namespace MAH_Platformer.Entities
             return velocity;
         }
 
-        /* public bool PixelCollition(Entity other)
-         {
-             Color[] dataA = new Color[tex.Width * tex.Height];
-             tex.GetData(dataA);
-             Color[] dataB = new Color[other.tex.Width * other.tex.Height];
-             other.tex.GetData(dataB);
-             int top = Math.Max(hitBox.Top, other.hitBox.Top);
-             int bottom = Math.Min(hitBox.Bottom, other.hitBox.Bottom);
-             int left = Math.Max(hitBox.Left, other.hitBox.Left);
-             int right = Math.Min(hitBox.Right, other.hitBox.Right);
-             for (int y = top; y < bottom; y++)
-             {
-                 for (int x = left; x < right; x++)
-                 {
-                     Color colorA = dataA[(x - hitBox.Left) +
-                     (y - hitBox.Top) * hitBox.Width];
-                     Color colorB = dataB[(x - other.hitBox.Left) +
-                    (y - other.hitBox.Top) *
-                    other.hitBox.Width];
-                     if (colorA.A != 0 && colorB.A != 0)
-                     {
-                         return true;
-                     }
-                 }
-             }
-             return false;
-         }*/
+        public bool PixelCollition(GameObject other)
+        {
+            if (other.sprite.Region == null || sprite.Region == null) return false;
+
+            Color[] dataA = new Color[sprite.Region.GetTexture().Width * sprite.Region.GetTexture().Height];
+            sprite.Region.GetTexture().GetData(dataA);
+            Color[] dataB = new Color[other.sprite.Region.GetTexture().Width * other.sprite.Region.GetTexture().Height];
+            other.sprite.Region.GetTexture().GetData(dataB);
+
+            int top = Math.Max(bounds.Top, other.GetBounds().Top);
+            int bottom = Math.Min(bounds.Bottom, other.GetBounds().Bottom);
+            int left = Math.Max(bounds.Left, other.GetBounds().Left);
+            int right = Math.Min(bounds.Right, other.GetBounds().Right);
+
+            for (int y = top; y < bottom; y++)
+            {
+                for (int x = left; x < right; x++)
+                {
+                    Color colorA = dataA[(int)((x - bounds.Left) / sprite.GetRealScale().X) +
+                    (int)((y - bounds.Top) * (bounds.Width / sprite.GetRealScale().X) / sprite.GetRealScale().Y)];
+
+                    Color colorB = dataB[(int)((x - other.GetBounds().Left) / other.sprite.GetRealScale().X ) +
+                   (int)((y - other.GetBounds().Top) * (other.GetBounds().Width / other.sprite.GetRealScale().X) / sprite.GetRealScale().Y)];
+
+                    if (colorA.A != 0 && colorB.A != 0) // Collision
+                        return true;
+                }
+            }
+            return false;
+        }
     }
 }

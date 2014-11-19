@@ -47,7 +47,7 @@ namespace MAH_Platformer
 
         public override Screen GetStartScreen()
         {
-            return new GameScreen();
+            return new MainMenuScreen();
         }
     }
 }

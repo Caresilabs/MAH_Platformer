@@ -21,6 +21,9 @@ namespace MAH_Platformer.Levels.Blocks
         {
             base.Enter(entity);
 
+            if (entity is PlayerEntity)
+                ((PlayerEntity)entity).OnGrounded();
+
             entity.SetVelocity(entity.GetVelocity().X,Math.Min(-Math.Abs(entity.GetVelocity().Y) + speed, -600));
         }
     }

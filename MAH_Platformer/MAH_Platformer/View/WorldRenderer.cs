@@ -18,11 +18,13 @@ namespace MAH_Platformer.View
 
         private World world;
         private Camera2D camera;
+        private GameScreen game;
 
         public WorldRenderer(GameScreen game)
         {
             this.world = game.GetWorld();
             this.camera = game.GetCamera();
+            this.game = game;
         }
 
         public void Update(float delta)
@@ -32,7 +34,7 @@ namespace MAH_Platformer.View
 
         public void LerpCamera(float x, float y, float delta)
         {
-            x = MathHelper.Clamp(x, 0, Level.WIDTH - camera.GetWidth());
+            x = MathHelper.Clamp(x, Block.BLOCK_SIZE/2, Level.WIDTH - camera.GetWidth() - Block.BLOCK_SIZE/2);
             camera.SetPosition(camera.GetPosition().X + (x - camera.GetPosition().X) * delta * 7, camera.GetPosition().Y + (y - camera.GetPosition().Y) * delta * 7);
         }
 
@@ -51,7 +53,14 @@ namespace MAH_Platformer.View
 
             DrawEntites(batch);
 
+            DrawUI(batch);
+
             batch.End();
+        }
+
+        private void DrawUI(SpriteBatch batch)
+        {
+            batch.DrawString(Assets.font, "Score:" + game.GetScore(), new Vector2(camera.GetPosition().X + 20, camera.GetPosition().Y + 20), Color.White);
         }
 
         private void DrawBackground(SpriteBatch batch)

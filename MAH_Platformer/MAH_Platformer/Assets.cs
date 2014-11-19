@@ -30,8 +30,6 @@ namespace MAH_Platformer
 
         public static SpriteFont font;
 
-        public static SoundEffect introSound;
-        public static SoundEffect eatSound;
         public static SoundEffect deathSound;
         public static Song music;
 
@@ -43,15 +41,17 @@ namespace MAH_Platformer
             // load our sprite sheet
             items = manager.Load<Texture2D>("Graphics/items");
             ui = manager.Load<Texture2D>("Graphics/ui");
+            character = manager.Load<Texture2D>("Graphics/character");
             bg1 = manager.Load<Texture2D>("Graphics/bg1");
             bg2 = manager.Load<Texture2D>("Graphics/bg2");
             bg3 = manager.Load<Texture2D>("Graphics/bg3");
 
             // Entities
-            LoadRegion("PlayerEntity", items, 32, 512, 32, 32);
+            LoadRegion("PlayerEntity", character, 0, 160, 48, 64);
             LoadRegion("SpawnEntity", items, 32, 512, 32, 32);
             LoadRegion("BoulderEntity", items, 0, 0, 32, 32);
             LoadRegion("BulletEntity", items, 36, 390, 16, 8);
+            LoadRegion("EnemyEntity", items, 36, 390, 16, 8);
 
             // Blocks
             LoadRegion("AirBlock", items, 400, 0, 1, 1);
@@ -60,11 +60,12 @@ namespace MAH_Platformer
             LoadRegion("TeleportBlock", items, 0, 96, 32, 32);
             LoadRegion("SpikeBlock", items, 0, 32, 32, 32);
             LoadRegion("JumpBlock", items, 96, 512, 32, 32);
+            LoadRegion("GoalBlock", items, 96, 512, 32, 32);
 
 
             // Load UI
             LoadRegion("pixel", items, 0, 0, 16, 16);
-            LoadRegion("title", ui, 0, 0, 290, 48);
+            LoadRegion("title", ui, 0, 0, 192, 112);
             LoadRegion("uiContainer", ui, 0, 64, 288, 128);
             LoadRegion("button", ui, 320, 64, 192, 64);
 
@@ -73,13 +74,15 @@ namespace MAH_Platformer
 
             // Load font 
             font = manager.Load<SpriteFont>("Font/font");
+            
+            // UI Config
+            UIConfig.DEFAULT_FONT = font;
+            UIConfig.DEFAULT_BUTTON = GetRegion("button");
 
             // load sound
             if (SOUND)
             {
-                introSound = manager.Load<SoundEffect>("Audio/pacman_beginning");
-                eatSound = manager.Load<SoundEffect>("Audio/pacman_chomp");
-                deathSound = manager.Load<SoundEffect>("Audio/pacman_death");
+                //deathSound = manager.Load<SoundEffect>("Audio/pacman_death");
                 //music = manager.Load<Song>("Audio/music");
                 //MediaPlayer.Volume = .8f;
                 //MediaPlayer.IsRepeating = true;
@@ -94,7 +97,7 @@ namespace MAH_Platformer
 
         public static TextureRegion GetRegion(string name)
         {
-            return regions[name];
+            return  regions.Keys.Contains(name) ? regions[name] : null;
         }
 
         public static void Unload()
