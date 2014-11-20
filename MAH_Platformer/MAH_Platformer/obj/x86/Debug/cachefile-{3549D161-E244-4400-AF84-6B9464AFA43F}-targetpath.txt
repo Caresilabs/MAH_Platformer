@@ -8,5 +8,7 @@ Content\Graphics\bg1.xnb
 Content\Graphics\bg2.xnb
 Content\Graphics\bg3.xnb
 Content\Graphics\character.xnb
+Content\Graphics\crawler.xnb
+Content\Graphics\boss.xnb
 Content\levels.txt
 Content\highscore.dat

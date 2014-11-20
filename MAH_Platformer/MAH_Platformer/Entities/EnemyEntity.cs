@@ -1,4 +1,5 @@
 ﻿using MAH_Platformer.Levels.Blocks;
+using Simon.Mah.Framework;
 using Simon.Mah.Framework.Scene2D;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,10 @@ namespace MAH_Platformer.Entities
         public static float DEFAULT_SPEED = 100;
 
         public EnemyEntity(TextureRegion region, float x, float y)
-            : base(region, x, y, Block.BLOCK_SIZE, Block.BLOCK_SIZE)
+            : base(region, x, y, Block.BLOCK_SIZE, Block.BLOCK_SIZE/1.7f)
         {
+            sprite.AddAnimation("run", new FrameAnimation(Assets.crawler, 0, 0, 44, 22, 2, .21f));
+            sprite.SetAnimation("run");
         }
 
         public override void Update(float delta, bool processGravity = true)
@@ -42,7 +45,7 @@ namespace MAH_Platformer.Entities
                     entity.SetVelocity(entity.GetVelocity().X, 400);
                 }
                 else
-                    ((PlayerEntity)entity).Respawn();
+                    Alive = false;
             }
 
             if (entity is BulletEntity)

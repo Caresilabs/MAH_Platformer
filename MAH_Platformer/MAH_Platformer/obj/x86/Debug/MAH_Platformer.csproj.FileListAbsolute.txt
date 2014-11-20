@@ -34,3 +34,5 @@ C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin
 C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\bg1.xnb
 C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\bg2.xnb
 C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\bg3.xnb
+C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\crawler.xnb
+C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\boss.xnb

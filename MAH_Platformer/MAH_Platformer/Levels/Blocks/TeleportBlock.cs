@@ -22,6 +22,9 @@ namespace MAH_Platformer.Levels.Blocks
         {
             base.Enter(entity);
 
+            if (entity is PlayerEntity)
+                ((PlayerEntity)entity).OnGrounded();
+
             Block block;
             if (Id % 2 == 0)
                 block = Level.GetBlockById(Id + 1);

@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\items.xnb</Output>
-      <Time>2014-11-18T11:15:32.1013298+01:00</Time>
+      <Time>2014-11-20T09:31:20.9017942+01:00</Time>
     </Item>
     <Item>
       <Source>Graphics\ui.png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\ui.xnb</Output>
-      <Time>2014-11-19T17:50:37.4679648+01:00</Time>
+      <Time>2014-11-20T09:27:19.4499839+01:00</Time>
     </Item>
     <Item>
       <Source>Font\font.spritefont</Source>
@@ -90,6 +90,24 @@
       <Options>None</Options>
       <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\character.xnb</Output>
       <Time>2014-11-18T14:24:04.4193747+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\crawler.png</Source>
+      <Name>Graphics\crawler</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\crawler.xnb</Output>
+      <Time>2014-11-20T09:40:50.1703545+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\boss.png</Source>
+      <Name>Graphics\boss</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Simon\Documents\GitHub\MAH_Platformer\MAH_Platformer\MAH_Platformer\bin\x86\Debug\Content\Graphics\boss.xnb</Output>
+      <Time>2014-11-20T09:54:39.4607872+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -157,6 +157,9 @@ namespace MAH_Platformer.Entities
 
         private void ProcessCollision(List<World.Direction> dirs, Rectangle tBounds)
         {
+            if (this is BulletEntity) 
+                return;
+
             Rectangle inter = Rectangle.Intersect(bounds, tBounds);
             Vector2 norVelocity = new Vector2(velocity.X, velocity.Y);
             norVelocity.Normalize();
@@ -202,6 +205,11 @@ namespace MAH_Platformer.Entities
         public Vector2 GetVelocity()
         {
             return velocity;
+        }
+
+        public Vector2 GetPosition()
+        {
+            return position;
         }
 
         public bool PixelCollition(GameObject other)

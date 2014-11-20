@@ -21,7 +21,7 @@ namespace MAH_Platformer.Levels.Blocks
 
             if (entity is PlayerEntity)
             {
-                ((PlayerEntity)entity).Respawn();
+                ((PlayerEntity)entity).Alive = false;
             }
         }
 

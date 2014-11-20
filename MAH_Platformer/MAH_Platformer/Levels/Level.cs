@@ -28,13 +28,16 @@ namespace MAH_Platformer.Levels
 
         public enum Entities
         {
-            PLAYER = (MAX_ID/LevelIO.ID_PER_BASE) / 2, //256
+            PLAYER = (MAX_ID / LevelIO.ID_PER_BASE) / 2, //256
             SPAWN,                                     // 264
             BOULDER,                                   // 272
-            ENEMY                                      // 280
+            ENEMY,                                      // 280
+            BOSS                                      // 288
         }
 
         public int CurrentLevel { get; private set; }
+
+        public bool WonGame { get; private set; }
 
         private List<Entity> entities;
         private Block[,] blocks;
@@ -66,6 +69,7 @@ namespace MAH_Platformer.Levels
 
         public void InitLevel(int level = 1)
         {
+            this.WonGame = false;
             this.entities = new List<Entity>();
 
             int[,] loadedMap = LevelIO.ReadLevel(level); //todo
@@ -110,7 +114,7 @@ namespace MAH_Platformer.Levels
 
         public void FillBlock(int x, int y, int id)
         {
-            int baseId = id - (id % LevelIO.ID_PER_BASE) - Enum.GetValues(typeof(Entities)).Cast<int>().Min()*LevelIO.ID_PER_BASE;
+            int baseId = id - (id % LevelIO.ID_PER_BASE) - Enum.GetValues(typeof(Entities)).Cast<int>().Min() * LevelIO.ID_PER_BASE;
 
             if (id > MAX_ID || id < Enum.GetValues(typeof(Entities)).Cast<int>().Min() * LevelIO.ID_PER_BASE)
                 return;
@@ -133,7 +137,7 @@ namespace MAH_Platformer.Levels
         {
             int baseId = id - (id % LevelIO.ID_PER_BASE);
 
-            if (baseId > (Enum.GetValues(typeof(Blocks)).Cast<int>().Max() * LevelIO.ID_PER_BASE)) 
+            if (baseId > (Enum.GetValues(typeof(Blocks)).Cast<int>().Max() * LevelIO.ID_PER_BASE))
                 return new AirBlock(null, x, y); // No valid block
 
             // Using generics to get new block
@@ -202,7 +206,7 @@ namespace MAH_Platformer.Levels
 
         public void NextLevel()
         {
-            if (CurrentLevel + 1 > LevelIO.LEVEL_MAX) return;
+            if (CurrentLevel + 1 > LevelIO.LEVEL_MAX) { WonGame = true; return; }
             CurrentLevel++;
             InitLevel(CurrentLevel);
         }

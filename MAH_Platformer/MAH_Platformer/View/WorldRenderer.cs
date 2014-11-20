@@ -60,7 +60,8 @@ namespace MAH_Platformer.View
 
         private void DrawUI(SpriteBatch batch)
         {
-            batch.DrawString(Assets.font, "Score:" + game.GetScore(), new Vector2(camera.GetPosition().X + 20, camera.GetPosition().Y + 20), Color.White);
+            batch.DrawString(Assets.font, "Score: " + game.GetScore(), new Vector2(camera.GetPosition().X + 10, camera.GetPosition().Y + 10), Color.White, 0, Vector2.Zero, .5f, SpriteEffects.None, 0);
+            batch.DrawString(Assets.font, "Lives: " + game.GetLives(), new Vector2(camera.GetPosition().X + 10, camera.GetPosition().Y + 40), Color.White, 0, Vector2.Zero, .4f, SpriteEffects.None, 0);
         }
 
         private void DrawBackground(SpriteBatch batch)

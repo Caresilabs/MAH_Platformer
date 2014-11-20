@@ -23,10 +23,14 @@ namespace MAH_Platformer
 
         public static Texture2D items;
         public static Texture2D ui;
-        public static Texture2D character;
+
         public static Texture2D bg1;
         public static Texture2D bg2;
         public static Texture2D bg3;
+
+        public static Texture2D character;
+        public static Texture2D crawler;
+        public static Texture2D boss;
 
         public static SpriteFont font;
 
@@ -42,6 +46,9 @@ namespace MAH_Platformer
             items = manager.Load<Texture2D>("Graphics/items");
             ui = manager.Load<Texture2D>("Graphics/ui");
             character = manager.Load<Texture2D>("Graphics/character");
+            crawler = manager.Load<Texture2D>("Graphics/crawler");
+            boss = manager.Load<Texture2D>("Graphics/boss");
+
             bg1 = manager.Load<Texture2D>("Graphics/bg1");
             bg2 = manager.Load<Texture2D>("Graphics/bg2");
             bg3 = manager.Load<Texture2D>("Graphics/bg3");
@@ -51,7 +58,8 @@ namespace MAH_Platformer
             LoadRegion("SpawnEntity", items, 32, 512, 32, 32);
             LoadRegion("BoulderEntity", items, 0, 0, 32, 32);
             LoadRegion("BulletEntity", items, 36, 390, 16, 8);
-            LoadRegion("EnemyEntity", items, 36, 390, 16, 8);
+            LoadRegion("EnemyEntity", crawler, 0, 390, 44, 22);
+            LoadRegion("BossEntity", boss, 0, 0, 128, 128);
 
             // Blocks
             LoadRegion("AirBlock", items, 400, 0, 1, 1);
@@ -60,7 +68,7 @@ namespace MAH_Platformer
             LoadRegion("TeleportBlock", items, 0, 96, 32, 32);
             LoadRegion("SpikeBlock", items, 0, 32, 32, 32);
             LoadRegion("JumpBlock", items, 96, 512, 32, 32);
-            LoadRegion("GoalBlock", items, 96, 512, 32, 32);
+            LoadRegion("GoalBlock", items, 0, 128, 32, 32);
 
 
             // Load UI

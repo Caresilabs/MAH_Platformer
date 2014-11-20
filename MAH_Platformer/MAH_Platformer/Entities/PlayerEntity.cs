@@ -20,8 +20,8 @@ namespace MAH_Platformer.Entities
         public const float DEFAULT_JUMP = -640;
         public const float MAX_SPEED = 1050;
 
-        public const float SHOOT_DELAY = .5f;
-        public const float SHOOT_SPEED = 500f;
+        public const float SHOOT_DELAY = .3f;
+        public const float SHOOT_SPEED = 650f;
 
         public enum PlayerState
         {
@@ -131,7 +131,7 @@ namespace MAH_Platformer.Entities
         private void UpdateStates(float delta)
         {
             // Check for death
-            if (position.Y > Level.GetBlocks().GetLength(1) * Block.BLOCK_SIZE)
+            if (position.Y > Level.GetBlocks().GetLength(1) * Block.BLOCK_SIZE + Block.BLOCK_SIZE * 7)
             {
                 Alive = false;
             }
@@ -166,6 +166,17 @@ namespace MAH_Platformer.Entities
                     IsGravity = true;
                     IsGrounded = false;
                 }
+            }
+        }
+
+        public override void Collide(Entity entity)
+        {
+            base.Collide(entity);
+
+            if (entity is BulletEntity)
+            {
+                if (((BulletEntity)entity).Owner != this)
+                    Alive = false;
             }
         }
 

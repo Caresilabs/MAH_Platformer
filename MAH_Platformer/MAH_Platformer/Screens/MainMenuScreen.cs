@@ -65,7 +65,12 @@ namespace MAH_Platformer.Screens
             {
                 if (actor.name == "start")
                 {
-                    SetScreen(new GameScreen());
+                    SetScreen(new IntroScreen());
+                    //SetScreen(new GameScreen());
+                }
+                if (actor.name == "highscores")
+                {
+                    SetScreen(new HighscoreScreen());
                 }
             }
         }

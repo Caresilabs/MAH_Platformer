@@ -1,4 +1,5 @@
 ﻿using MAH_Platformer.Levels.Blocks;
+using Microsoft.Xna.Framework;
 using Simon.Mah.Framework.Scene2D;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,8 @@ namespace MAH_Platformer.Entities
         {
             base.Collide(entity);
 
-           // if (entity is Entity)
-           // {
-                if (bounds.Top < entity.GetBounds().Bottom - 16)
-                    velocity.X = entity.GetVelocity().X * 2;//((PlayerEntity)entity).GetVelocity().X*2;
-           // }
+            if (bounds.Top < entity.GetBounds().Bottom - 16)
+                velocity.X = MathHelper.Clamp(entity.GetVelocity().X * 2, -400, 400);
         }
     }
 }
