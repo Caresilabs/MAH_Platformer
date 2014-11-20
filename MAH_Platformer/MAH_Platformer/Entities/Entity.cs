@@ -28,6 +28,8 @@ namespace MAH_Platformer.Entities
 
         public float FrictionModifier { get; set; }
 
+        public int Id { get; set; }
+
         protected Vector2 velocity;
 
         public Entity(TextureRegion region, float x, float y, float width, float height)

@@ -1,4 +1,5 @@
 ﻿using MAH_Platformer.Levels.Blocks;
+using Microsoft.Xna.Framework.Graphics;
 using Simon.Mah.Framework;
 using Simon.Mah.Framework.Scene2D;
 using System;
@@ -13,7 +14,7 @@ namespace MAH_Platformer.Entities
         public static float DEFAULT_SPEED = 100;
 
         public EnemyEntity(TextureRegion region, float x, float y)
-            : base(region, x, y, Block.BLOCK_SIZE, Block.BLOCK_SIZE/1.7f)
+            : base(region, x, y, Block.BLOCK_SIZE, Block.BLOCK_SIZE / 2f)
         {
             sprite.AddAnimation("run", new FrameAnimation(Assets.crawler, 0, 0, 44, 22, 2, .21f));
             sprite.SetAnimation("run");
@@ -27,10 +28,12 @@ namespace MAH_Platformer.Entities
 
         private void UpdateAI(float delta)
         {
-            // if (velocity.X == 0)
-            // {
-            velocity.X = DEFAULT_SPEED;
-            //}
+            if (Id % 2 == 0)
+                velocity.X = DEFAULT_SPEED;
+            else
+                velocity.X = -DEFAULT_SPEED;
+
+            sprite.Effect = velocity.X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
         }
 
         public override void Collide(Entity entity)
@@ -45,7 +48,10 @@ namespace MAH_Platformer.Entities
                     entity.SetVelocity(entity.GetVelocity().X, 400);
                 }
                 else
+                {
                     Alive = false;
+                    entity.Alive = false;
+                }
             }
 
             if (entity is BulletEntity)

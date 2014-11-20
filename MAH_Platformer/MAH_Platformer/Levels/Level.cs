@@ -130,6 +130,8 @@ namespace MAH_Platformer.Levels
                 player.SetSpawn(x * Block.BLOCK_SIZE, y * Block.BLOCK_SIZE);
             }
 
+            entity.Id = id;
+
             AddEntity(entity);
         }
 
