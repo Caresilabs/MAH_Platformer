@@ -224,6 +224,7 @@ namespace MAH_Platformer.Entities
                     sprite.SetAnimation("run");
                     break;
                 case PlayerState.CLIMBING:
+                    sprite.SetAnimation("idle");
                     break;
                 case PlayerState.IDLE:
                     sprite.SetAnimation("idle");

@@ -29,7 +29,7 @@ namespace MAH_Platformer.Entities
             base.Update(delta, false);
             this.StateTime += delta;
 
-            if (StateTime > 2.5f)
+            if (StateTime > 1.3f)
                 Alive = false;
         }
 

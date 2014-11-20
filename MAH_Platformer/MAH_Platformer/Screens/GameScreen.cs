@@ -16,7 +16,7 @@ namespace MAH_Platformer.Screens
 {
     public class GameScreen : Screen
     {
-        private const int START_SCORE = 20000;
+        private const int START_SCORE = 60000;
 
         private Camera2D camera;
         private World world;
@@ -37,25 +37,37 @@ namespace MAH_Platformer.Screens
 
         public override void Update(float delta)
         {
-            this.score -= delta * 183;
-
-            world.Update(delta);
             renderer.Update(delta);
+
+            Console.WriteLine(1/delta);
 
             if (!world.GetLevel().GetPlayer().Alive && Mouse.GetState().RightButton != ButtonState.Pressed)
             {
                 lives--;
-                if (lives <= 0)
+
+                if (lives > 0)
+                    world.GetLevel().GetPlayer().Respawn();
+            }
+
+            if (lives <= 0)
+            {
+                if (InputHandler.KeyReleased(Keys.R))
                 {
                     lives = 3;
                     world.GetLevel().InitLevel(world.GetLevel().CurrentLevel);
                 }
-                else
-                    world.GetLevel().GetPlayer().Respawn();
+            }
+            else
+            {
+                this.score -= delta * 183;
+                world.Update(delta);
             }
 
             if (world.GetLevel().WonGame)
-                SetScreen(new WinScreen());
+            {
+                HighscoreManager.SaveHighscore(GetScore());
+                SetScreen(new WinScreen(GetScore()));
+            }
 
             if (InputHandler.KeyReleased(Keys.D0))
                 world.GetLevel().NextLevel();

@@ -206,7 +206,9 @@ namespace MAH_Platformer.Levels
 
         public void NextLevel()
         {
-            if (CurrentLevel + 1 > LevelIO.LEVEL_MAX) { WonGame = true; return; }
+            if (CurrentLevel + 1 > LevelIO.LEVEL_MAX) {
+                WonGame = true;
+                return; }
             CurrentLevel++;
             InitLevel(CurrentLevel);
         }

@@ -15,13 +15,20 @@ namespace MAH_Platformer.Screens
      */
     public class WinScreen : Screen
     {
+        private int score;
+
+        public WinScreen(int score)
+        {
+            this.score = score;
+        }
+
         public override void Init()
         {
         }
 
         public override void Update(float delta)
         {
-            if (InputHandler.Clicked())
+            if (InputHandler.KeyReleased(Keys.M))
                 SetScreen(new MainMenuScreen());
         }
 
@@ -32,16 +39,31 @@ namespace MAH_Platformer.Screens
             batch.Begin();
 
             // draw bg
-            batch.Draw(Assets.GetRegion("bg1"),
-                new Rectangle(0, 0, batch.GraphicsDevice.Viewport.Width, batch.GraphicsDevice.Viewport.Height),
-                    Assets.GetRegion("bg1"), Color.White, 0, Vector2.Zero, SpriteEffects.None, 1);
+            //  batch.Draw(Assets.GetRegion("bg1"),
+            //    new Rectangle(0, 0, batch.GraphicsDevice.Viewport.Width, batch.GraphicsDevice.Viewport.Height),
+            //      Assets.GetRegion("bg1"), Color.White, 0, Vector2.Zero, SpriteEffects.None, 1);
 
             // Draw title
-            batch.DrawString(Assets.font, "WOOOW DUUDE!!\n  congratulations!", new Vector2(GetGraphics().Viewport.Width / 2 - 170, 80), Color.YellowGreen);
+            DrawCenterString(batch, GetGraphics().Viewport.Width, "You slayed King Wasp!!", 180, Color.YellowGreen, 1.4f);
+            DrawCenterString(batch, GetGraphics().Viewport.Width, "Congratulations!", 250, Color.YellowGreen);
 
-            batch.DrawString(Assets.font, "You are Winner!", new Vector2(GetGraphics().Viewport.Width / 2 - 150, GetGraphics().Viewport.Height / 2), Color.Black);
+            DrawCenterString(batch, GetGraphics().Viewport.Width,
+                "The kingdom gave you the Score: " + score, .5f * GetGraphics().Viewport.Height + 10, Color.White);
 
             batch.End();
+        }
+
+        public static void DrawCenterString(SpriteBatch batch, float width, string text, float y, Color color, float scale = 1)
+        {
+            batch.DrawString(Assets.font, text,
+                    new Vector2(
+                        width / 2 - ((Assets.font.MeasureString(text).Length() * scale) / 2), y),
+                         color, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+        }
+
+        public static void DrawCenterString(SpriteBatch batch, float width, string text, float y, float scale = 1)
+        {
+            DrawCenterString(batch, width, text, y, Color.White, scale);
         }
 
         public override void Dispose()

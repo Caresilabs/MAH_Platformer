@@ -70,7 +70,7 @@ namespace MAH_Platformer.Screens
                 }
                 if (actor.name == "highscores")
                 {
-                    SetScreen(new HighscoreScreen());
+                   SetScreen(new HighscoreScreen());
                 }
             }
         }

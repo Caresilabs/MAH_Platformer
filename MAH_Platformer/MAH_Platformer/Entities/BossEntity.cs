@@ -242,13 +242,13 @@ namespace MAH_Platformer.Entities
                 velocity.X *= -1.2f;
             }
 
-            if (Life == 50)
+            if (Life == 30)
             {
                 SetState(4);
                 velocity.X *= -1.2f;
             }
 
-            if (Life == 25)
+            if (Life == 10)
             {
                 SetState(6);
             }

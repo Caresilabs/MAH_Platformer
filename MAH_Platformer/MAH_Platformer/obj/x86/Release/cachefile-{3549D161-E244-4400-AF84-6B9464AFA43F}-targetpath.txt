@@ -1,0 +1,14 @@
+Content\Audio\pacman_beginning.xnb
+Content\Audio\pacman_chomp.xnb
+Content\Audio\pacman_death.xnb
+Content\Graphics\items.xnb
+Content\Graphics\ui.xnb
+Content\Graphics\bg1.xnb
+Content\Graphics\bg2.xnb
+Content\Graphics\bg3.xnb
+Content\Graphics\character.xnb
+Content\Graphics\crawler.xnb
+Content\Graphics\boss.xnb
+Content\Font\font.xnb
+Content\levels.txt
+Content\highscore.dat

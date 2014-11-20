@@ -142,7 +142,9 @@ namespace MAH_Platformer.Entities
 
                     if (block.GetBounds().Intersects(bounds))
                     {
-                        //if (PixelCollition(block)) {
+                        if (false)
+                            PixelCollision(block);
+
                         block.Collide(this);
                         if (block.Blocks(this))
                             ProcessCollision(dirs, block.GetBounds());
@@ -212,7 +214,7 @@ namespace MAH_Platformer.Entities
             return position;
         }
 
-        public bool PixelCollition(GameObject other)
+        public bool PixelCollision(GameObject other)
         {
             if (other.sprite.Region == null || sprite.Region == null) return false;
 

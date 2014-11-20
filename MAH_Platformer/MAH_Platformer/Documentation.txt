@@ -3,9 +3,9 @@
 Basic Entities:
 	[
 		Bob |C
-		Big bad Boss
+		Big bad Boss |C
 		Boulder |C
-		Little Steve
+		Little Steve |C
 		Save Point |C
 	]
 
@@ -13,15 +13,15 @@ Basic Entities:
 
 Blocks (Tiles):
 	[
-		AIR
-		Ground
-		Win
+		AIR |C
+		Ground |C
+		Win |C
 		Pitblock (push boulder)
-		Switchblock
+		Switchblock 
 		Loot block
-		Teleport
+		Teleport |C
 		?Ice
-		?Ladder
+		?Ladder |C
 	]
 
 	*? = Low Priority
@@ -29,7 +29,7 @@ Blocks (Tiles):
 Items:
 	[
 		Fire
-		Pistol
+		Pistol |C
 	]
 
 	*? = Low Priority
@@ -54,10 +54,10 @@ Block/Entities Connections
 
 Player Mechanics:
 
-	Move
-	Jump + Double/walljump
-	Use
-	Climb
+	Move |C
+	Jump + Double/walljump |C
+	Use 
+	Climb |C
 	?Fly
 
 
