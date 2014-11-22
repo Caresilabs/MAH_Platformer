@@ -2,6 +2,7 @@
 using MAH_Platformer.Levels.Blocks;
 using MAH_Platformer.Model;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Simon.Mah.Framework.Scene2D;
 using System;
 using System.Collections.Generic;
@@ -222,6 +223,14 @@ namespace MAH_Platformer.Entities
             Color[] dataB = new Color[other.sprite.Region.GetSource().Width * other.sprite.Region.GetSource().Height];
             other.sprite.Region.GetTexture().GetData(0, other.sprite.Region, dataB, 0, dataB.Length);
 
+            if (sprite.Effect == SpriteEffects.FlipHorizontally)
+                return PixelCollisionHFlip(other, dataA, dataB);
+            else
+                return PixelCollision(other, dataA, dataB);
+        }
+
+        private bool PixelCollision(GameObject other, Color[] dataA, Color[] dataB)
+        {
             int top = Math.Max(bounds.Top, other.GetBounds().Top);
             int bottom = Math.Min(bounds.Bottom, other.GetBounds().Bottom);
             int left = Math.Max(bounds.Left, other.GetBounds().Left);
@@ -232,6 +241,30 @@ namespace MAH_Platformer.Entities
                 for (int x = left; x < right; x++)
                 {
                     Color colorA = dataA[(int)((x - bounds.Left) / sprite.GetRealScale().X) +
+                    (int)((int)((y - bounds.Top) / sprite.GetRealScale().Y) * (bounds.Width / sprite.GetRealScale().X))];
+
+                    Color colorB = dataB[(int)((x - other.GetBounds().Left) / other.sprite.GetRealScale().X) +
+                   (int)((int)((y - other.GetBounds().Top) / other.sprite.GetRealScale().Y) * (other.GetBounds().Width / other.sprite.GetRealScale().X))];
+
+                    if (colorA.A != 0 && colorB.A != 0) // Collision
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        private bool PixelCollisionHFlip(GameObject other, Color[] dataA, Color[] dataB)
+        {
+            int top = Math.Max(bounds.Top, other.GetBounds().Top);
+            int bottom = Math.Min(bounds.Bottom, other.GetBounds().Bottom);
+            int left = Math.Max(bounds.Left, other.GetBounds().Left);
+            int right = Math.Min(bounds.Right, other.GetBounds().Right);
+
+            for (int y = top; y < bottom; y++)
+            {
+                for (int x = left; x < right; x++)
+                {
+                    Color colorA = dataA[(int)(bounds.Width / sprite.GetRealScale().X) - 1 - (int)((x - bounds.Left) / sprite.GetRealScale().X) +
                     (int)((int)((y - bounds.Top) / sprite.GetRealScale().Y) * (bounds.Width / sprite.GetRealScale().X))];
 
                     Color colorB = dataB[(int)((x - other.GetBounds().Left) / other.sprite.GetRealScale().X) +
