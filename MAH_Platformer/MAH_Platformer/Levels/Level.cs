@@ -127,7 +127,7 @@ namespace MAH_Platformer.Levels
             if (entity is PlayerEntity)
             {
                 player = (PlayerEntity)entity;
-                player.SetSpawn(x * Block.BLOCK_SIZE, y * Block.BLOCK_SIZE);
+                player.SetSpawn(x * Block.BLOCK_SIZE,Block.BLOCK_SIZE + y * Block.BLOCK_SIZE);
             }
 
             entity.Id = id;

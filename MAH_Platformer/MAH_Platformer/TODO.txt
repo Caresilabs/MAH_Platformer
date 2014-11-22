@@ -1,7 +1,7 @@
 ﻿ Flera nivåer (~1-2p)CHeck
  Meny (~1p) Check
  Olika typer av bandelar t.ex. teleporter, stegar och fällor (~1-4p) CHECK
- Kan döda fiender på flera olika sätt (~1p) TARGET
+ Kan döda fiender på flera olika sätt (~1p) CHECK
  Level editor (~2-4p) TARGET??
  Bana som är större än skärmen (~1-3p) CHECK
  Paralaxscrollning (~1p) CHECK

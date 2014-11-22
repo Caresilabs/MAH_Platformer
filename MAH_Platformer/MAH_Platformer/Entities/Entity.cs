@@ -48,8 +48,6 @@ namespace MAH_Platformer.Entities
         public virtual void Update(float delta, bool processGravity = true) // TODO hmm check if virtual is working
         {
             // Entity is moving
-            //if (processGravity || IsGravity)
-            // {
             Vector2 oldPosition = position;
 
             if (processGravity && IsGravity)
@@ -88,8 +86,6 @@ namespace MAH_Platformer.Entities
             }
 
             UpdatePos(position);
-
-            // }
 
             base.Update(delta);
         }
@@ -144,8 +140,8 @@ namespace MAH_Platformer.Entities
 
                     if (block.GetBounds().Intersects(bounds))
                     {
-                        if (false)
-                            PixelCollision(block);
+                        if (block is SpikeBlock)
+                            if (!PixelCollision(block)) continue;
 
                         block.Collide(this);
                         if (block.Blocks(this))
@@ -161,7 +157,7 @@ namespace MAH_Platformer.Entities
 
         private void ProcessCollision(List<World.Direction> dirs, Rectangle tBounds)
         {
-            if (this is BulletEntity) 
+            if (this is BulletEntity)
                 return;
 
             Rectangle inter = Rectangle.Intersect(bounds, tBounds);
@@ -185,7 +181,7 @@ namespace MAH_Platformer.Entities
                     dirs.Add(World.Direction.DOWN);
                 }
                 else
-                    position.Y += (inter.Height +4);
+                    position.Y += (inter.Height + 4);
 
                 velocity.Y = 0;
             }
@@ -220,10 +216,11 @@ namespace MAH_Platformer.Entities
         {
             if (other.sprite.Region == null || sprite.Region == null) return false;
 
-            Color[] dataA = new Color[sprite.Region.GetTexture().Width * sprite.Region.GetTexture().Height];
-            sprite.Region.GetTexture().GetData(dataA);
-            Color[] dataB = new Color[other.sprite.Region.GetTexture().Width * other.sprite.Region.GetTexture().Height];
-            other.sprite.Region.GetTexture().GetData(dataB);
+            Color[] dataA = new Color[sprite.Region.GetSource().Width * sprite.Region.GetSource().Height];
+            sprite.Region.GetTexture().GetData(0, sprite.Region, dataA, 0, dataA.Length);
+
+            Color[] dataB = new Color[other.sprite.Region.GetSource().Width * other.sprite.Region.GetSource().Height];
+            other.sprite.Region.GetTexture().GetData(0, other.sprite.Region, dataB, 0, dataB.Length);
 
             int top = Math.Max(bounds.Top, other.GetBounds().Top);
             int bottom = Math.Min(bounds.Bottom, other.GetBounds().Bottom);
@@ -235,10 +232,10 @@ namespace MAH_Platformer.Entities
                 for (int x = left; x < right; x++)
                 {
                     Color colorA = dataA[(int)((x - bounds.Left) / sprite.GetRealScale().X) +
-                    (int)((y - bounds.Top) * (bounds.Width / sprite.GetRealScale().X) / sprite.GetRealScale().Y)];
+                    (int)((int)((y - bounds.Top) / sprite.GetRealScale().Y) * (bounds.Width / sprite.GetRealScale().X))];
 
-                    Color colorB = dataB[(int)((x - other.GetBounds().Left) / other.sprite.GetRealScale().X ) +
-                   (int)((y - other.GetBounds().Top) * (other.GetBounds().Width / other.sprite.GetRealScale().X) / sprite.GetRealScale().Y)];
+                    Color colorB = dataB[(int)((x - other.GetBounds().Left) / other.sprite.GetRealScale().X) +
+                   (int)((int)((y - other.GetBounds().Top) / other.sprite.GetRealScale().Y) * (other.GetBounds().Width / other.sprite.GetRealScale().X))];
 
                     if (colorA.A != 0 && colorB.A != 0) // Collision
                         return true;
