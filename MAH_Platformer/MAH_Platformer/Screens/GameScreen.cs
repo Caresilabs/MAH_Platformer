@@ -39,7 +39,7 @@ namespace MAH_Platformer.Screens
         {
             renderer.Update(delta);
 
-            Console.WriteLine(1/delta);
+            //Console.WriteLine(1/delta);
 
             if (!world.GetLevel().GetPlayer().Alive && Mouse.GetState().RightButton != ButtonState.Pressed)
             {
