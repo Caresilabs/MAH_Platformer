@@ -6,5 +6,7 @@ addiction for jumping on deadly platforms! Same thing goes with this project, th
 
 Join the journey! Let the coding begin!
 
+EDIT* Time's up! No more commits will be done to this project.
+
 Cheers!
 Simon
